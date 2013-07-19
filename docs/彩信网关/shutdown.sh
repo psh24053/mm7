@@ -1,0 +1,1 @@
+java -cp ../bin/SimpleUMS.jar Shutdown
