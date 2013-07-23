@@ -1,0 +1,79 @@
+<config clearLog="14" power="4">
+
+<authenticate name="admin" role="administrator">
+	<url>http://127.0.0.1:8081</url>
+	<account>forest_luo</account>
+	<password>root</password>
+</authenticate>
+<service port="8081">
+	<application docBase="/webpages" id="admin" mapping="/admin"/>
+</service>
+
+<gateway name="server" type="mm7.cuc" closer="2">
+	<!-- These are all authentications of gateway. -->
+	<authenticate name="whoami" role="authorized">
+            <enterprise_code>71565</enterprise_code>
+            <service_code>10628973</service_code>
+            <version>6.3.0</version>
+            <server_id>927001</server_id>
+                <url>/vas</url>
+            <account>10628973</account>
+            <password>10628973</password>
+        </authenticate>
+	<!-- These are all configs about properties of gateway. -->
+	<properties type="mixed" cache="256" removable="false"/>
+	<!-- These are all configs about transmitter. -->
+	<transmit type="safe.priority" cache="8" size="16384" removable="false">
+		<index type="mixed" cache="8" size="16384" removable="false" timeout="120"/>
+		<queue type="direct.classify" cache="8" size="16384" removable="false"/>
+		<request type="list.priority" cache="8" removable="true"/>
+		<response type="list.priority" cache="8" removable="true"/>
+	</transmit>
+	<assistant type="transmitter.packet.expired" action="normal" count="1"/>
+	<assistant type="transmitter.message.normal" action="normal" count="1"/>
+	<assistant type="transmitter.message.failed" action="normal" count="1"/>
+	<assistant type="transmitter.message.expired" action="normal" count="1"/>
+	<assistant type="transmitter.report.normal" action="normal" count="1"/>
+	<assistant type="transmitter.report.failed" action="normal" count="1"/>
+	<assistant type="transmitter.report.expired" action="normal" count="1"/>
+	<!-- These are all configs about receiver. -->
+	<receive type="safe.priority" cache="8" size="16384" removable="false">
+		<index type="mixed" cache="8" size="16384" removable="false" timeout="259200"/>
+		<queue type="direct.classify" cache="8" size="16384" removable="false"/>
+		<request type="list.priority" cache="8" removable="true"/>
+		<response type="list.priority" cache="8" removable="true"/>
+	</receive>
+	<assistant type="receiver.packet.expired" action="normal" count="1"/>
+	<assistant type="receiver.message.normal" action="normal" count="1"/>
+	<assistant type="receiver.message.failed" action="normal" count="1"/>
+	<assistant type="receiver.message.expired" action="normal" count="1"/>
+	<assistant type="receiver.report.normal" action="normal" count="1"/>
+	<assistant type="receiver.report.failed" action="normal" count="1"/>
+	<assistant type="receiver.report.expired" action="normal" count="1"/>
+	<!-- These are all configs about sesssions. -->
+	<assistant type="collector.packet" count="10"/>
+	<assistant type="distributor.packet" count="10"/>
+	
+	<assistant type="connection.stream.connecter.socket" count="1" authenticate="whoami">
+		<socket timeout="5">
+			<remote host="127.0.0.1" port="8089"/>
+		</socket>
+		<session type="client.receiver" sync="true" count="10">
+			<build_when_data_available/>
+			<packet max="131072"/>
+			<timeout packet="60" message="60"/>
+		</session>
+	</assistant>
+	<assistant type="connection.stream.accepter.socket" count="1" authenticate="whoami">
+		<socket timeout="5">
+			<local port="8088"/>
+		</socket>
+		<session type="server.transmitter" sync="true" count="100">
+			<packet max="131072"/>
+			<timeout packet="10" message="10"/>
+		</session>
+	</assistant>
+
+</gateway>
+
+</config>

@@ -1,0 +1,393 @@
+18:54:28>-------------------------------------------------------------------------------
+18:54:28>|                                 Kernel 3.0                                  |
+18:54:28>|-----------------------------------------------------------------------------|
+18:54:28>|                                 SimpleTeam                                  |
+18:54:28>|-----------------------------------------------------------------------------|
+18:54:28>| Supported by :   www.simpleteam.com  |  e-Mail :     support@simpleteam.com |
+18:54:28>|-----------------------------------------------------------------------------|
+18:54:28>TaskManager.initialize : power(4) was initialized !
+18:54:28>SimpleThread(TimeUpdater).startup : accelerated !
+18:54:28>SimpleThread(TimeUpdater).startup : startup !
+18:54:28>SimpleThread(threadManager).startup : accelerated !
+18:54:28>SimpleThread(TimeUpdater).run : running !
+18:54:28>SimpleThread(threadManager).startup : startup !
+18:54:28>SimpleThread(ProcessManager).startup : accelerated !
+18:54:28>SimpleThread(threadManager).run : running !
+18:54:28>SimpleThread(ProcessManager).startup : startup !
+18:54:28>SimpleThread(ProcessManager).run : running !
+18:54:28>SimpleThread(ProcessThread[00000001]).startup : accelerated !
+18:54:28>SimpleThread(ProcessThread[00000001]).startup : startup !
+18:54:28>TaskManager(taskManager).startup : thread(ProcessThread[00000001]) was added !
+18:54:28>ProcessThread(ProcessThread[00000001]).run : running !
+18:54:28>SimpleThread(ProcessThread[00000002]).startup : accelerated !
+18:54:28>SimpleThread(ProcessThread[00000002]).startup : startup !
+18:54:28>TaskManager(taskManager).startup : thread(ProcessThread[00000002]) was added !
+18:54:28>SimpleThread(ProcessThread[00000003]).startup : accelerated !
+18:54:28>SimpleThread(ProcessThread[00000003]).startup : startup !
+18:54:28>ProcessThread(ProcessThread[00000003]).run : running !
+18:54:28>ProcessThread(ProcessThread[00000002]).run : running !
+18:54:28>TaskManager(taskManager).startup : thread(ProcessThread[00000003]) was added !
+18:54:28>SimpleThread(ProcessThread[00000004]).startup : accelerated !
+18:54:28>SimpleThread(ProcessThread[00000004]).startup : startup !
+18:54:28>ProcessThread(ProcessThread[00000004]).run : running !
+18:54:28>TaskManager(taskManager).startup : thread(ProcessThread[00000004]) was added !
+18:54:28>TaskManager(taskManager).startup : 4 threads were created and startup !
+18:54:28>SimpleThread(taskManager).startup : accelerated !
+18:54:28>SimpleThread(taskManager).startup : startup !
+18:54:28>TaskManager.initialize : process manager startup !
+18:54:28>SimpleThread(taskManager).run : running !
+18:54:29>SMHTTPGateway(server).prepared : submit mask has not been set !
+18:54:29>SMHTTPGateway(server).prepared : deliver mask has been set !
+18:54:29>SimpleProcess(server.receivedCache[i]).startup : running !
+18:54:29>SimpleTransactor(server.receivedCache).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.receivedCache).startup : running !
+18:54:29>SimpleProcess(server.transmittedCache[i]).startup : running !
+18:54:29>SimpleTransactor(server.transmittedCache).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.transmittedCache).startup : running !
+18:54:29>SimpleProcess(server.receiver.requestQueue[q]).startup : running !
+18:54:29>SimpleTransactor(server.receiver.requestQueue).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.receiver.requestQueue).startup : running !
+18:54:29>SimpleProcess(server.receiver.responseQueue[q]).startup : running !
+18:54:29>SimpleTransactor(server.receiver.responseQueue).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.receiver.responseQueue).startup : running !
+18:54:29>SimpleProcess(server.receiver.messageQueue[q]).startup : running !
+18:54:29>SimpleTransactor(server.receiver.messageQueue).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.receiver.messageQueue).startup : running !
+18:54:29>SimpleTransactor(server.receiver).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.receiver).startup : running !
+18:54:29>SimpleProcess(server.transmitter.requestQueue[q]).startup : running !
+18:54:29>SimpleTransactor(server.transmitter.requestQueue).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.transmitter.requestQueue).startup : running !
+18:54:29>SimpleProcess(server.transmitter.responseQueue[q]).startup : running !
+18:54:29>SimpleTransactor(server.transmitter.responseQueue).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.transmitter.responseQueue).startup : running !
+18:54:29>SimpleProcess(server.transmitter.messageQueue[q]).startup : running !
+18:54:29>SimpleTransactor(server.transmitter.messageQueue).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.transmitter.messageQueue).startup : running !
+18:54:29>SimpleTransactor(server.transmitter).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.transmitter).startup : running !
+18:54:29>SimpleThread(server.closer[0d909c3e]).startup : accelerated !
+18:54:29>SimpleThread(server.closer[0d909c3e]).startup : startup !
+18:54:29>SimpleThread(server.closer[40c9a199]).startup : accelerated !
+18:54:29>ControllableThread(server.closer[0d909c3e]).run : running !
+18:54:29>ControllableThread(server.closer[40c9a199]).run : running !
+18:54:29>SimpleThread(server.closer[40c9a199]).startup : startup !
+18:54:29>SimpleThread(server.closers).startup : accelerated !
+18:54:29>SimpleThread(server.closers).startup : startup !
+18:54:29>SimpleThread(server.sessions).startup : accelerated !
+18:54:29>ControllableThread(server.closers).run : running !
+18:54:29>ControllableThread(server.sessions).run : running !
+18:54:29>SimpleThread(server.sessions).startup : startup !
+18:54:29>SimpleTransactor(server.assistants.PGTEP[0001]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTEP[0001]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGTNM[0002]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTNM[0002]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGTFM[0003]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTFM[0003]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGTEM[0004]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTEM[0004]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGTNR[0005]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTNR[0005]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGTFR[0006]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTFR[0006]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGTER[0007]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGTER[0007]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGREP[0008]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGREP[0008]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGRNM[0009]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGRNM[0009]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGRFM[000a]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGRFM[000a]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGREM[000b]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGREM[000b]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGRNR[000c]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGRNR[000c]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGRFR[000d]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGRFR[000d]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.PGRER[000e]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.PGRER[000e]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[000f]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[000f]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0010]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0010]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0011]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0011]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0012]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0012]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0013]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0013]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0014]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0014]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0015]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0015]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0016]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0016]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0017]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0017]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.collector[0018]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.collector[0018]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[0019]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[0019]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[001a]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[001a]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[001b]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[001b]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[001c]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[001c]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[001d]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[001d]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[001e]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[001e]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[001f]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[001f]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[0020]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[0020]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[0021]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[0021]).startup : running !
+18:54:29>SimpleTransactor(server.assistants.distributor[0022]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.distributor[0022]).startup : running !
+18:54:29>SimpleConnecter(server.assistants.connecter[0023]).createThread : connecter device thread was created !
+18:54:29>ConnectionAssistant(server.assistants.connecter[0023]).prepare : 10 session(session.client.receiver)s needed !
+18:54:29>SimpleConnecter(server.assistants.connecter[0023]).createThread : connecter thread was created !
+18:54:29>ConnectionAssistant(server.assistants.connecter[0023]).prepare : 1 thread(s) was added !
+18:54:29>SimpleThread(SimpleThread).startup : accelerated !
+18:54:29>SimpleThread(SimpleThread).startup : startup !
+18:54:29>ControllableThread(SimpleThread).run : running !
+18:54:29>SimpleThread(server.assistants.connecter[0023]).startup : accelerated !
+18:54:29>SimpleThread(server.assistants.connecter[0023]).startup : startup !
+18:54:29>ControllableThread(server.assistants.connecter[0023]).run : running !
+18:54:29>SimpleTransactor(server.assistants.connecter[0023]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.connecter[0023]).startup : running !
+18:54:29>SimpleAccepter(server.assistants.accepter[0024]).createDeviceThread : accepter device thread was created !
+18:54:29>ConnectionAssistant(server.assistants.accepter[0024]).prepare : 100 session(session.server.transmitter)s needed !
+18:54:29>SimpleAccepter(server.assistants.accepter[0024]).createThread : accepter thread was created !
+18:54:29>ConnectionAssistant(server.assistants.accepter[0024]).prepare : 1 thread(s) was added !
+18:54:29>SimpleThread(SimpleThread).startup : accelerated !
+18:54:29>SimpleThread(SimpleThread).startup : startup !
+18:54:29>ControllableThread(SimpleThread).run : running !
+18:54:29>SimpleThread(server.assistants.accepter[0024]).startup : accelerated !
+18:54:29>SimpleThread(server.assistants.accepter[0024]).startup : startup !
+18:54:29>ControllableThread(server.assistants.accepter[0024]).run : running !
+18:54:29>SimpleTransactor(server.assistants.accepter[0024]).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.assistants.accepter[0024]).startup : running !
+18:54:29>SimpleThread(server.assistants).startup : accelerated !
+18:54:29>SimpleThread(server.assistants).startup : startup !
+18:54:29>SimpleProcess(server.properties).startup : running !
+18:54:29>ControllableThread(server.assistants).run : running !
+18:54:29>SimpleProcess(server.transmit[q]).startup : running !
+18:54:29>SimpleTransactor(server.transmit).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.transmit).startup : running !
+18:54:29>SimpleProcess(server.receive[q]).startup : running !
+18:54:29>SimpleTransactor(server.receive).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server.receive).startup : running !
+18:54:29>SimpleTransactor(server).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(server).startup : running !
+18:54:29>SimpleProcess(this.properties).startup : running !
+18:54:29>SimpleTransactor(this).prepared : transactor has already been prepared !
+18:54:29>SimpleProcess(this).startup : running !
+18:54:29>SimulatorCenter.main : system startup !
+18:54:30>SocketStreamConnecter(server.assistants.connecter[0023]).openDevice : default device of socket connecter was set !
+18:54:30>SimpleTransactor(server.session[00230001].PT).prepared : transactor has already been prepared !
+18:54:30>SimpleProcess(server.session[00230001].PT).startup : running !
+18:54:30>SimpleTransactor(server.session[00230001]).prepared : transactor has already been prepared !
+18:54:30>SimpleProcess(server.session[00230001]).startup : running !
+18:54:30>ConnecterThread(server.assistants.connecter[0023]).process : session(session.client.receiver) was connected !
+18:54:30>SimpleTransactor(server.session[00230002].PT).prepared : transactor has already been prepared !
+18:54:30>SimpleProcess(server.session[00230002].PT).startup : running !
+18:54:30>Simpl19:00:52>-------------------------------------------------------------------------------
+19:00:52>|                                 Kernel 3.0                                  |
+19:00:52>|-----------------------------------------------------------------------------|
+19:00:52>|                                 SimpleTeam                                  |
+19:00:52>|-----------------------------------------------------------------------------|
+19:00:52>| Supported by :   www.simpleteam.com  |  e-Mail :     support@simpleteam.com |
+19:00:52>|-----------------------------------------------------------------------------|
+19:00:52>TaskManager.initialize : power(4) was initialized !
+19:00:52>SimpleThread(TimeUpdater).startup : accelerated !
+19:00:52>SimpleThread(TimeUpdater).startup : startup !
+19:00:52>SimpleThread(TimeUpdater).run : running !
+19:00:52>SimpleThread(threadManager).startup : accelerated !
+19:00:52>SimpleThread(threadManager).startup : startup !
+19:00:52>SimpleThread(ProcessManager).startup : accelerated !
+19:00:52>SimpleThread(threadManager).run : running !
+19:00:52>SimpleThread(ProcessManager).startup : startup !
+19:00:52>SimpleThread(ProcessManager).run : running !
+19:00:52>SimpleThread(ProcessThread[00000001]).startup : accelerated !
+19:00:52>SimpleThread(ProcessThread[00000001]).startup : startup !
+19:00:52>ProcessThread(ProcessThread[00000001]).run : running !
+19:00:52>TaskManager(taskManager).startup : thread(ProcessThread[00000001]) was added !
+19:00:52>SimpleThread(ProcessThread[00000002]).startup : accelerated !
+19:00:52>SimpleThread(ProcessThread[00000002]).startup : startup !
+19:00:52>ProcessThread(ProcessThread[00000002]).run : running !
+19:00:52>TaskManager(taskManager).startup : thread(ProcessThread[00000002]) was added !
+19:00:52>SimpleThread(ProcessThread[00000003]).startup : accelerated !
+19:00:52>SimpleThread(ProcessThread[00000003]).startup : startup !
+19:00:52>TaskManager(taskManager).startup : thread(ProcessThread[00000003]) was added !
+19:00:52>SimpleThread(ProcessThread[00000004]).startup : accelerated !
+19:00:52>ProcessThread(ProcessThread[00000003]).run : running !
+19:00:52>SimpleThread(ProcessThread[00000004]).startup : startup !
+19:00:52>TaskManager(taskManager).startup : thread(ProcessThread[00000004]) was added !
+19:00:52>TaskManager(taskManager).startup : 4 threads were created and startup !
+19:00:52>SimpleThread(taskManager).startup : accelerated !
+19:00:52>ProcessThread(ProcessThread[00000004]).run : running !
+19:00:52>SimpleThread(taskManager).run : running !
+19:00:52>SimpleThread(taskManager).startup : startup !
+19:00:52>TaskManager.initialize : process manager startup !
+19:00:53>SMHTTPGateway(server).prepared : submit mask has not been set !
+19:00:53>SMHTTPGateway(server).prepared : deliver mask has been set !
+19:00:53>SimpleProcess(server.receivedCache[i]).startup : running !
+19:00:53>SimpleTransactor(server.receivedCache).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.receivedCache).startup : running !
+19:00:53>SimpleProcess(server.transmittedCache[i]).startup : running !
+19:00:53>SimpleTransactor(server.transmittedCache).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.transmittedCache).startup : running !
+19:00:53>SimpleProcess(server.receiver.requestQueue[q]).startup : running !
+19:00:53>SimpleTransactor(server.receiver.requestQueue).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.receiver.requestQueue).startup : running !
+19:00:53>SimpleProcess(server.receiver.responseQueue[q]).startup : running !
+19:00:53>SimpleTransactor(server.receiver.responseQueue).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.receiver.responseQueue).startup : running !
+19:00:53>SimpleProcess(server.receiver.messageQueue[q]).startup : running !
+19:00:53>SimpleTransactor(server.receiver.messageQueue).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.receiver.messageQueue).startup : running !
+19:00:53>SimpleTransactor(server.receiver).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.receiver).startup : running !
+19:00:53>SimpleProcess(server.transmitter.requestQueue[q]).startup : running !
+19:00:53>SimpleTransactor(server.transmitter.requestQueue).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.transmitter.requestQueue).startup : running !
+19:00:53>SimpleProcess(server.transmitter.responseQueue[q]).startup : running !
+19:00:53>SimpleTransactor(server.transmitter.responseQueue).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.transmitter.responseQueue).startup : running !
+19:00:53>SimpleProcess(server.transmitter.messageQueue[q]).startup : running !
+19:00:53>SimpleTransactor(server.transmitter.messageQueue).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.transmitter.messageQueue).startup : running !
+19:00:53>SimpleTransactor(server.transmitter).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.transmitter).startup : running !
+19:00:53>SimpleThread(server.closer[5c38a727]).startup : accelerated !
+19:00:53>SimpleThread(server.closer[5c38a727]).startup : startup !
+19:00:53>ControllableThread(server.closer[5c38a727]).run : running !
+19:00:53>SimpleThread(server.closer[0f4fb723]).startup : accelerated !
+19:00:53>SimpleThread(server.closer[0f4fb723]).startup : startup !
+19:00:53>ControllableThread(server.closer[0f4fb723]).run : running !
+19:00:53>SimpleThread(server.closers).startup : accelerated !
+19:00:53>SimpleThread(server.closers).startup : startup !
+19:00:53>ControllableThread(server.closers).run : running !
+19:00:53>SimpleThread(server.sessions).startup : accelerated !
+19:00:53>SimpleThread(server.sessions).startup : startup !
+19:00:53>ControllableThread(server.sessions).run : running !
+19:00:53>SimpleTransactor(server.assistants.PGTEP[0001]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTEP[0001]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGTNM[0002]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTNM[0002]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGTFM[0003]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTFM[0003]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGTEM[0004]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTEM[0004]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGTNR[0005]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTNR[0005]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGTFR[0006]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTFR[0006]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGTER[0007]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGTER[0007]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGREP[0008]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGREP[0008]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGRNM[0009]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGRNM[0009]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGRFM[000a]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGRFM[000a]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGREM[000b]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGREM[000b]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGRNR[000c]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGRNR[000c]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGRFR[000d]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGRFR[000d]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.PGRER[000e]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.PGRER[000e]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[000f]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[000f]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0010]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0010]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0011]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0011]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0012]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0012]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0013]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0013]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0014]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0014]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0015]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0015]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0016]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0016]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0017]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0017]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.collector[0018]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.collector[0018]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[0019]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[0019]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[001a]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[001a]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[001b]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[001b]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[001c]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[001c]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[001d]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[001d]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[001e]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[001e]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[001f]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[001f]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[0020]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[0020]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[0021]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[0021]).startup : running !
+19:00:53>SimpleTransactor(server.assistants.distributor[0022]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.distributor[0022]).startup : running !
+19:00:53>SimpleConnecter(server.assistants.connecter[0023]).createThread : connecter device thread was created !
+19:00:53>ConnectionAssistant(server.assistants.connecter[0023]).prepare : 10 session(session.client.receiver)s needed !
+19:00:53>SimpleConnecter(server.assistants.connecter[0023]).createThread : connecter thread was created !
+19:00:53>ConnectionAssistant(server.assistants.connecter[0023]).prepare : 1 thread(s) was added !
+19:00:53>SimpleThread(SimpleThread).startup : accelerated !
+19:00:53>SimpleThread(SimpleThread).startup : startup !
+19:00:53>ControllableThread(SimpleThread).run : running !
+19:00:53>SimpleThread(server.assistants.connecter[0023]).startup : accelerated !
+19:00:53>SimpleThread(server.assistants.connecter[0023]).startup : startup !
+19:00:53>ControllableThread(server.assistants.connecter[0023]).run : running !
+19:00:53>SimpleTransactor(server.assistants.connecter[0023]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.connecter[0023]).startup : running !
+19:00:53>SimpleAccepter(server.assistants.accepter[0024]).createDeviceThread : accepter device thread was created !
+19:00:53>ConnectionAssistant(server.assistants.accepter[0024]).prepare : 100 session(session.server.transmitter)s needed !
+19:00:53>SimpleAccepter(server.assistants.accepter[0024]).createThread : accepter thread was created !
+19:00:53>ConnectionAssistant(server.assistants.accepter[0024]).prepare : 1 thread(s) was added !
+19:00:53>SimpleThread(SimpleThread).startup : accelerated !
+19:00:53>SimpleThread(SimpleThread).startup : startup !
+19:00:53>SimpleThread(server.assistants.accepter[0024]).startup : accelerated !
+19:00:53>ControllableThread(SimpleThread).run : running !
+19:00:53>ControllableThread(server.assistants.accepter[0024]).run : running !
+19:00:53>SimpleThread(server.assistants.accepter[0024]).startup : startup !
+19:00:53>SimpleTransactor(server.assistants.accepter[0024]).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.assistants.accepter[0024]).startup : running !
+19:00:53>SimpleThread(server.assistants).startup : accelerated !
+19:00:53>SimpleThread(server.assistants).startup : startup !
+19:00:53>ControllableThread(server.assistants).run : running !
+19:00:53>SimpleProcess(server.properties).startup : running !
+19:00:53>SimpleProcess(server.transmit[q]).startup : running !
+19:00:53>SimpleTransactor(server.transmit).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.transmit).startup : running !
+19:00:53>SimpleProcess(server.receive[q]).startup : running !
+19:00:53>SimpleTransactor(server.receive).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server.receive).startup : running !
+19:00:53>SimpleTransactor(server).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(server).startup : running !
+19:00:53>SimpleProcess(this.properties).startup : running !
+19:00:53>SimpleTransactor(this).prepared : transactor has already been prepared !
+19:00:53>SimpleProcess(this).startup : running !
+19:00:53>SimulatorCenter.main : system startup !
+19:00:54>SocketStreamConnecter(server.assistants.connecter[0023]).openDevice : default device of socket connecter was set !
+19:00:54>SimpleTransactor(server.session[00230001].PT).prepared : transactor has already been prepared !
+19:00:54>SimpleProcess(server.session[00230001].PT).startup : running !
+19:00:54>SimpleTransactor(server.session[00230001]).prepared : transactor has already been prepared !
+19:00:54>SimpleProcess(server.session[00230001]).startup : running !
+19:00:54>ConnecterThread(server.assistants.connecter[0023]).process : session(session.client.receiver) was connected !
+19:00:54>SimpleTransactor(server.session[00230002].PT).prepared : transactor has already been prepared !
+19:00:54>SimpleProcess(server.session[00230002].PT).startup : running !
+19:00:54>Simpl
