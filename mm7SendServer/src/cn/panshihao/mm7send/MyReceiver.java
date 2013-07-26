@@ -18,10 +18,11 @@ public class MyReceiver extends MM7Receiver {
 
 	// Main方法
 	public static void main(String[] args) throws Exception {
+		
 		// 初始化VASP
-		MM7Config mm7Config = new MM7Config("d:/mm7Config.xml");
+		MM7Config mm7Config = new MM7Config(MyReceiver.class.getClassLoader().getResource("mm7Config.xml").getPath());
 //		// 设置ConnConfig.xml文件的路径
-		mm7Config.setConnConfigName("d:/ConnConfig.xml"); // 必备
+		mm7Config.setConnConfigName(MyReceiver.class.getClassLoader().getResource("ConnConfig.xml").getPath()); // 必备
 		// 构造MyReceiver
 		MyReceiver receiver = new MyReceiver();
 		receiver.setConfig(mm7Config); // 必备
@@ -29,14 +30,13 @@ public class MyReceiver extends MM7Receiver {
 		MM7Sender mm7Sender = new MM7Sender(mm7Config);
 		MM7SubmitReq submitReq = new MM7SubmitReq();
 		
-		submitReq.setTransactionID("10628973");
+		submitReq.setTransactionID("100001");
 		submitReq.setVASPID("71565");
 		submitReq.setVASID("10628973");
 		submitReq.setServiceCode("31810112");
 		submitReq.setSenderAddress("10628973");
 		
 		submitReq.addTo("18684012650");
-		submitReq.setMessageClass("10628973");
 		
 		submitReq.setDeliveryReport(true);
 		submitReq.setSubject("测试");
