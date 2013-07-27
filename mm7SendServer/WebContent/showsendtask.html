@@ -34,14 +34,14 @@ $('#showsendtask').bind('pagecreate', function(){
  * 初始化事件
  */
 function initEvent_ShowSendTask(){
-	$('#logout_button').on('tap', function(event){
+	$('.logout_button').on('tap', function(event){
 		logout();
 	});
 }
 </script>
 		<div data-role="header">
 			<h1>联通彩信发送管理系统 - 查看发送任务</h1>
-			<a data-role="button" id="logout_button" data-icon="back" href="login.html"
+			<a data-role="button" class="logout_button" data-icon="back" href="login.html"
 				data-iconpos="left" class="ui-btn-left">退出 </a>
 		</div>
 
