@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>联通彩信发送管理系统 - 修改密码</title>
+<title>联通彩信发送管理系统 - 查看发送任务</title>
 <link rel="stylesheet" href="jqm/jquery.mobile-1.3.2.min.css" />
 <link rel="stylesheet" href="css/mm7.css" />
 <script src="js/jquery-1.10.2.min.js"></script>
@@ -12,9 +12,9 @@
 
 </head>
 <body>
-	<div data-role="page" id="modify_password" data-theme="b">
+	<div data-role="page" id="showsendtask" data-theme="b">
 	<script type="text/javascript">
-$('#modifypassword').bind('pagecreate', function(){
+$('#showsendtask').bind('pagecreate', function(){
 	// 如果当前浏览器不支持，则停止执行
 	if(!browserSupport()){
 		alert('请使用以下浏览器进行浏览（Chrome20+,FireFox10+,IE9+,360浏览器6.0+）');
@@ -22,7 +22,7 @@ $('#modifypassword').bind('pagecreate', function(){
 		
 		//判断是否登录
 		if(isLogin()){
-			initEvent_ModifyPassword();
+			initEvent_ShowSendTask();
 		}else{
 			$.mobile.changePage('login.html');
 			
@@ -33,14 +33,14 @@ $('#modifypassword').bind('pagecreate', function(){
 /**
  * 初始化事件
  */
-function initEvent_ModifyPassword(){
+function initEvent_ShowSendTask(){
 	$('#logout_button').on('tap', function(event){
 		logout();
 	});
 }
 </script>
 		<div data-role="header">
-			<h1>联通彩信发送管理系统 - 修改密码</h1>
+			<h1>联通彩信发送管理系统 - 查看发送任务</h1>
 			<a data-role="button" id="logout_button" data-icon="back" href="login.html"
 				data-iconpos="left" class="ui-btn-left">退出 </a>
 		</div>
@@ -53,16 +53,16 @@ function initEvent_ModifyPassword(){
 				<ul data-role="listview" data-theme="c" data-dividertheme="d">
 					<li><a href="index.html">首页</a></li>
 					<li><a href="createsendtask.html">创建发送任务</a></li>
-					<li><a href="showsendtask.html">查看发送任务</a></li>
+					<li data-theme="b"><a href="showsendtask.html">查看发送任务</a></li>
 					<li><a href="showfaillist.html">查看失败号码</a></li>
-					<li data-theme="b"><a href="modifypassword.html">修改密码</a></li>
+					<li><a href="modifypassword.html">修改密码</a></li>
 				</ul>
 			</div>
 
 
 			<div class="content_main">
 
-				<h2>修改密码</h2>
+				<h2>查看发送任务</h2>
 
 
 			</div>

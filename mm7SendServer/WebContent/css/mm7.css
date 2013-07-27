@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
 
 .content_menu{
-	width: 30%;
+	width: 15%;
 	float: left;
 }
 .content_main{
-	width: 60%;
+	width: 75%;
 	float: left;
 	margin-left: 3%;
 }
