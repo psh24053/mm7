@@ -7,5 +7,13 @@
 .content_main{
 	width: 75%;
 	float: left;
-	margin-left: 3%;
+	margin-left: 7%;
+}
+.content_img{
+	border: 1px #cccccc solid;
+	float: left;
+}
+.content_Str{
+	width: 100%;
+	float: left;
 }

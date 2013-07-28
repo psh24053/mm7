@@ -1,4 +1,4 @@
-
+	
 /**
  * 退出登录
  */
@@ -14,6 +14,7 @@ function browserSupport(){
 	if(localStorage == undefined){
 		return false;
 	}
+	
 	return true;
 	
 }
