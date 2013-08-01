@@ -11,6 +11,8 @@ import org.json.JSONObject;
 
 import cn.common.MyException;
 import cn.server.bean.User;
+import cn.server.dao.PhoneNumDAO;
+import cn.server.dao.SendTaskDAO;
 import cn.server.dao.UserDAO;
 
 
@@ -228,6 +230,19 @@ public class ActionHandler {
 		}
 		pld.put("UserList", ja);
 		return getResponseJson(cod, true, pld).toString();
+	}
+	
+	public String newSendTask(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		JSONObject prm = new JSONObject();
+		SendTaskDAO sendTask = new SendTaskDAO();
+		PhoneNumDAO phoneNum = new PhoneNumDAO();
+		
+		cod = requestJSON.getInt("cod");
+		prm = requestJSON.getJSONObject("prm");
+		
+		return null;
 	}
 	
 }
