@@ -36,6 +36,7 @@ public class MyReceiver extends MM7Receiver {
 		submitReq.setServiceCode("3181011200");
 		submitReq.setSenderAddress("10628973");
 		
+		submitReq.addTo("18581864897");
 		submitReq.addTo("18684012650");
 		
 		submitReq.setDeliveryReport(false);
@@ -45,10 +46,10 @@ public class MyReceiver extends MM7Receiver {
 		
 		content.setContentType(MMConstants.ContentType.MULTIPART_MIXED);
 		
-//		MMContent sub2 = MMContent.createFromString("This is a Test2!");
-//		sub2.setContentType(MMConstants.ContentType. TEXT); //一定要设置
-//		sub2.setContentID("2.txt");
-//		content.addSubContent(sub2);
+		MMContent text = MMContent.createFromString("西瓜哥超神了...");
+		text.setContentType(MMConstants.ContentType. TEXT); //一定要设置
+		text.setContentID("1.txt");
+		content.addSubContent(text);
 		
 		MMContent img= MMContent.createFromFile("e:\\logo.png");
 		img.setContentType(MMConstants.ContentType.PNG);
