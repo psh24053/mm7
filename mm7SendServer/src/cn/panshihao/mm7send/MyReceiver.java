@@ -33,23 +33,27 @@ public class MyReceiver extends MM7Receiver {
 		submitReq.setTransactionID("100001");
 		submitReq.setVASPID("71565");
 		submitReq.setVASID("10628973");
-		submitReq.setServiceCode("31810112");
+		submitReq.setServiceCode("3181011200");
 		submitReq.setSenderAddress("10628973");
 		
 		submitReq.addTo("18684012650");
 		
-		submitReq.setDeliveryReport(true);
-		submitReq.setSubject("测试");
+		submitReq.setDeliveryReport(false);
+//		submitReq.setSubject("测试");
 		
 		MMContent content = new MMContent();
 		
 		content.setContentType(MMConstants.ContentType.MULTIPART_MIXED);
 		
-		MMContent sub2 = MMContent.createFromString("This is a Test2!");
-		sub2.setContentType(MMConstants.ContentType. TEXT); //一定要设置
-		sub2.setContentID("2.txt");
-		content.addSubContent(sub2);
+//		MMContent sub2 = MMContent.createFromString("This is a Test2!");
+//		sub2.setContentType(MMConstants.ContentType. TEXT); //一定要设置
+//		sub2.setContentID("2.txt");
+//		content.addSubContent(sub2);
 		
+		MMContent img= MMContent.createFromFile("e:\\logo.png");
+		img.setContentType(MMConstants.ContentType.PNG);
+		img.setContentID("logo.png");
+		content.addSubContent(img);
 		
 		submitReq.setContent(content);
 		
