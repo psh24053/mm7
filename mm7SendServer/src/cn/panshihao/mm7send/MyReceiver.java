@@ -46,15 +46,14 @@ public class MyReceiver extends MM7Receiver {
 		
 		content.setContentType(MMConstants.ContentType.MULTIPART_MIXED);
 		
-		MMContent text = MMContent.createFromString("西瓜哥超神了...");
+		MMContent text = MMContent.createFromString("我和我的小伙伴都惊呆了。");
 		text.setContentType(MMConstants.ContentType. TEXT); //一定要设置
-		text.setContentID("1.txt");
 		content.addSubContent(text);
 		
-		MMContent img= MMContent.createFromFile("e:\\logo.png");
-		img.setContentType(MMConstants.ContentType.PNG);
-		img.setContentID("logo.png");
-		content.addSubContent(img);
+//		MMContent img= MMContent.createFromFile("e:\\logo.png");
+//		img.setContentType(MMConstants.ContentType.PNG);
+//		img.setContentID("logo.png");
+//		content.addSubContent(img);
 		
 		submitReq.setContent(content);
 		
