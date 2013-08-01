@@ -1,6 +1,10 @@
 package cn.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.common.MyException;
+import cn.server.bean.User;
 
 public class Test {
 
@@ -15,7 +19,15 @@ public class Test {
 		// TODO Auto-generated method stub
 		TestDB test = new TestDB();
 		try {
-			test.adduser();
+			ArrayList<User> list = new ArrayList<>();
+			list = (ArrayList<User>) test.getUserList();
+			System.out.println(list.size());
+			for (int i = 0; i < list.size(); i++) {
+				User user = (User) list.get(i);
+				if(user.getLastLoginTime()!= null){
+					System.out.println(user.getLastLoginTime());
+				}
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
