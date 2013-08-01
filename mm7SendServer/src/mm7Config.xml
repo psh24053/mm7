@@ -14,7 +14,7 @@
 	<mmscURL>http://119.6.251.96:8080/MMSG/services/MM7AOMT</mmscURL>
 	<mmscIP>119.6.251.96:8080</mmscIP>	
 	<UseSSL>false</UseSSL>
-	<ListenIP>119.6.251.96</ListenIP>
+	<ListenIP>182.140.141.110</ListenIP>
 	<ListenPort>8080</ListenPort>
 	<BackLog>50</BackLog>
 	<TimeOut>10000</TimeOut>
