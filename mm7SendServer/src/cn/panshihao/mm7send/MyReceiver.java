@@ -36,7 +36,7 @@ public class MyReceiver extends MM7Receiver {
 		submitReq.setServiceCode("3181011200");
 		submitReq.setSenderAddress("10628973");
 		
-		submitReq.addTo("18581864897");
+//		submitReq.addTo("18581864897");
 		submitReq.addTo("18684012650");
 		
 		submitReq.setDeliveryReport(false);
@@ -62,7 +62,7 @@ public class MyReceiver extends MM7Receiver {
 				";res.statusText=" + res.getStatusText());
 		
 		// 启动接收器
-//		receiver.start();
+		receiver.start();
 	}
 
 	public MM7VASPRes doDeliver(MM7DeliverReq request) {
@@ -74,7 +74,7 @@ public class MyReceiver extends MM7Receiver {
 				+ request.getSubject());
 		// 企业需要进行一些处理，例如构建MM7DeliverRes消息，设置ServiceCode或StatusCode
 		MM7DeliverRes mm7DeliverRes = new MM7DeliverRes();
-		mm7DeliverRes.setServiceCode("服务代码"); // 设置ServiceCode，可选
+		mm7DeliverRes.setServiceCode("3181011200"); // 设置ServiceCode，可选
 		mm7DeliverRes.setStatusCode(MMConstants.RequestStatus.SUCCESS);/*
 																		 * 设置请求完成状态，
 																		 * 必备，
