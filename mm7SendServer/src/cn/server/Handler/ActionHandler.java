@@ -245,4 +245,13 @@ public class ActionHandler {
 		return null;
 	}
 	
+	public String getSendTaskList(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		int pageNum = 0;
+		int countLimit = 0;
+		JSONObject prm = new JSONObject();
+		return null;
+	}
+	
 }

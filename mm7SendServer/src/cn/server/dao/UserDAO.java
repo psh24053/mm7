@@ -27,7 +27,7 @@ public class UserDAO {
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					throw new MyException("添加用户测试异常！！", e, this.getClass().getName(), "jaja");
+					throw new MyException("数据库添加用户测试异常！！", e, this.getClass().getName(), "jaja");
 				}
 				return null;
 			}
@@ -52,7 +52,7 @@ public class UserDAO {
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					throw new MyException("检测用户是否存在出现异常！！！", this.getClass().getName(), "checkUserExist");
+					throw new MyException("数据库检测用户是否存在出现异常！！！", this.getClass().getName(), "checkUserExist");
 				}
 				return false;
 			}
@@ -80,7 +80,7 @@ public class UserDAO {
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					throw new MyException("登陆根据用户名取得用户信息异常！",e);
+					throw new MyException("数据库登陆根据用户名取得用户信息异常！",e);
 				}
 				return user;
 			}
@@ -99,7 +99,7 @@ public class UserDAO {
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					throw new MyException("删除用户出现异常！", e);
+					throw new MyException("数据库删除用户出现异常！", e);
 				}
 				return stat.execute();
 			}
@@ -120,7 +120,7 @@ public class UserDAO {
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					throw new MyException("修改用户密码异常！", e);
+					throw new MyException("数据库修改用户密码异常！", e);
 				}
 			}
 		}.execute();
@@ -148,7 +148,7 @@ public class UserDAO {
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					throw new MyException("取得用户列表异常",e);
+					throw new MyException("数据库取得用户列表异常",e);
 				}
 				return list;
 			}
@@ -167,7 +167,7 @@ public class UserDAO {
 					return stat.execute();
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new MyException("更新登陆时间出现异常！",e);
+					throw new MyException("数据库更新登陆时间出现异常！",e);
 				}
 			}
 		}.execute();

@@ -103,7 +103,7 @@ public class FileUpload extends HttpServlet {
 						fileName=file.getName(); 
 						System.out.println("截取后的文件名  "+fileName);
 						//保存上传文件
-						item.write(new File(realpath+"/"+fileName));
+						item.write(new File(realpath+File.separator+fileName));
 					}
 				}
 			}
