@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>创建发送任务</title>
-<link rel="stylesheet" href="jqm/jquery.mobile-1.3.2.min.css" />
-		<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
-		
-		<link rel="stylesheet" href="css/mm7.css" />
-		<script src="js/jquery-1.10.2.min.js"></script>
-		<script src="jqm/jquery.mobile-1.3.2.min.js"></script>
-		<script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
-		<script src="js/ajax.js"></script>
-		<script src="js/mm7.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-</head>
-<body>
-	<div data-role="page" id="createsendtask" data-theme="b">
+<%@ include file="header.jsp"%>
+
+<div data-role="page" id="createsendtask" data-theme="b">
 	<script type="text/javascript">
 $('#createsendtask').bind('pagecreate', function(){
 	// 如果当前浏览器不支持，则停止执行
@@ -29,7 +16,7 @@ $('#createsendtask').bind('pagecreate', function(){
 			initEvent_CreateSendTask();
 			initUI();
 		}else{
-			$.mobile.changePage('login.html');
+			$.mobile.changePage('login.jsp');
 			
 		}
 		
@@ -234,91 +221,71 @@ function addImage(Url){
 	});
 }
 </script>
-		<div data-role="header">
-			<h1>创建发送任务</h1>
-			<a data-role="button" class="logout_button" data-icon="back" href="login.html"
-				data-iconpos="left" class="ui-btn-left">退出 </a>
-		</div>
+	<div data-role="header">
+		<h1>创建发送任务</h1>
+		<a data-role="button" class="logout_button" data-icon="back"
+			href="login.jsp" data-iconpos="left" class="ui-btn-left">退出 </a>
+	</div>
 
 
-		<div data-role="content">
+	<div data-role="content">
 
-			<div class="content_menu">
+		<jsp:include page="menu.jsp">
+			<jsp:param value="createsendtask" name="id"/>
+		</jsp:include>
 
-				<ul data-role="listview" data-readonly="true" data-theme="c" data-dividertheme="d">
-					<li><a href="index.html">首页</a></li>
-					<li data-theme="b"><a href="createsendtask.html">创建发送任务</a></li>
-					<li><a href="showsendtask.html">查看发送任务</a></li>
-					<li><a href="showfaillist.html">查看失败号码</a></li>
-					<li><a href="modifypassword.html">修改密码</a></li>
+		<div class="content_main">
+
+			<form action="">
+				<div data-role="fieldcontain">
+					<label for="name"> 任务名称 </label> <input name="" id="name"
+						placeholder="" value="" type="text">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="NumberCount"> 接收号码总数 </label> <input name=""
+						id="NumberCount" placeholder="" value="1000" type="number">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="CustomNumber"> 自定义号码 </label> <input name=""
+						id="CustomNumber" placeholder="" value="123,456,789" type="text">
+				</div>
+
+
+				<a id="create_addtext" data-icon="plus" data-role="button"
+					data-inline="true"> 文本内容 </a> <a data-role="button"
+					data-inline="true" id="create_addimage" data-icon="plus"
+					data-iconpos="left"> 图片内容 </a> <a data-role="button"
+					data-inline="true" id="mms_preview" data-icon="star"
+					data-iconpos="left"> 预览模式 </a>
+
+				<ul data-role="listview" id="content" data-divider-theme="b"
+					data-inset="true">
+					<li data-role="list-divider" role="heading">彩信内容</li>
 				</ul>
-			</div>
 
 
-			<div class="content_main">
-
-				<form action="">
-					<div data-role="fieldcontain">
-		                <label for="name">
-		                    任务名称
-		                </label>
-		                <input name="" id="name" placeholder="" value="" type="text">
-		            </div>
-		            <div data-role="fieldcontain">
-		                <label for="NumberCount">
-		                    接收号码总数
-		                </label>
-		                <input name="" id="NumberCount" placeholder="" value="1000" type="number">
-		            </div>
-		            <div data-role="fieldcontain">
-		                <label for="CustomNumber">
-		                    自定义号码
-		                </label>
-		                <input name="" id="CustomNumber" placeholder="" value="123,456,789" type="text">
-		            </div>
-					
-					
-					<a id="create_addtext"  data-icon="plus" data-role="button" data-inline="true" >
-				            文本内容
-				    </a> 
-					<a data-role="button" data-inline="true" id="create_addimage" data-icon="plus"
-				        data-iconpos="left">
-				            图片内容
-				    </a>
-				    <a data-role="button" data-inline="true" id="mms_preview"  data-icon="star"
-				        data-iconpos="left">
-				           预览模式
-				    </a>
-					
-	                <ul data-role="listview" id="content" data-divider-theme="b" data-inset="true">
-			            <li data-role="list-divider" role="heading">
-			                彩信内容
-			            </li>
-			        </ul>
-					
-					
-					
-					
-					
-					<a data-role="button" id="create_button">发送任务 </a>
-				</form>
 
 
-			</div>
 
+				<a data-role="button" id="create_button">发送任务 </a>
+			</form>
 
 
 		</div>
 
-		<div data-role="footer" data-theme="c">
-			<p style="text-align: center">By Panshihao.Cn</p>
-		</div>
 
 
 	</div>
-	
-	
-	<!-- <div data-role="page" id="addText_dialog" >
+
+	<div data-role="footer" data-theme="c">
+		<p style="text-align: center">By Panshihao.Cn</p>
+	</div>
+
+
+</div>
+
+
+<!-- <div data-role="page" id="addText_dialog" >
 		<div data-role="header">
 			<h2>增加文本内容</h2>
 		</div>
@@ -327,9 +294,6 @@ function addImage(Url){
 		</div>
 	</div>
 	 -->
-	
-	
-	
-	
-</body>
-</html>
+
+
+<%@ include file="footer.jsp"%>

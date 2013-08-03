@@ -55,19 +55,37 @@ public class ActionHandler {
 			return getErrorJson("handler解析cod出现异常！！！").toString();
 		}
 		
-//		if(cod != 101){
-//			if(request.getSession().getAttribute("User") == null){
-//				return getErrorJson("用户未登录请登陆！！！").toString();
-//			}
-//		}
+		if(cod != 101){
+			if(request.getSession().getAttribute("User") == null){
+				return getErrorJson("用户未登录或登录超时，请重新登陆！").toString();
+			}
+		}
 		
 		try {
 			switch (cod) {
 			case 101:
-				
+				responseStr = userLogin(requestJSON, request, response);
 				break;
 			case 102:
-				responseStr = this.addUser(requestJSON);
+				responseStr = userLogout(requestJSON, request, response);
+				break;
+			case 103:
+				responseStr = editPassWord(requestJSON, request, response);
+				break;
+			case 104:
+				responseStr = getUserList(requestJSON, request, response);
+				break;
+			case 105:
+				responseStr = addUser(requestJSON);
+				break;
+			case 106:
+				responseStr = deleteUser(requestJSON, request, response);
+				break;
+			case 107:
+				responseStr = getSendTaskList(requestJSON, request, response);
+				break;
+			case 108:
+				responseStr = newSendTask(requestJSON, request, response);
 				break;
 			default:
 				break;
@@ -76,7 +94,7 @@ public class ActionHandler {
 			
 			e.printStackTrace();
 		}
-		return null;
+		return responseStr;
 	}
 	
 	private static JSONObject getErrorJson(String errorMsg){
@@ -84,6 +102,20 @@ public class ActionHandler {
 		JSONObject pld = new JSONObject();
 		try {
 			errorjson.put("cod", 100);
+			errorjson.put("res", false);
+			pld.put("errorMsg", errorMsg);
+			errorjson.put("pld", pld);
+		} catch (JSONException e) {
+			
+			e.printStackTrace();
+		}
+		return errorjson;
+	}
+	private static JSONObject getErrorJson(String errorMsg, int cod){
+		JSONObject errorjson = new JSONObject();
+		JSONObject pld = new JSONObject();
+		try {
+			errorjson.put("cod", cod);
 			errorjson.put("res", false);
 			pld.put("errorMsg", errorMsg);
 			errorjson.put("pld", pld);
@@ -117,7 +149,7 @@ public class ActionHandler {
 			String passWord = prm.getString("PassWord");
 			int grade = prm.getInt("grade");
 			if(userDao.checkUserExist(userName)){
-				throw new MyException("该用户已存在！！！");
+				return getErrorJson("用户名已存在", cod).toString();
 			}else{
 				userDao.adduser(userName, passWord, grade);
 			}
@@ -142,14 +174,14 @@ public class ActionHandler {
 			String passWord = prm.getString("PassWord");
 			User user = userDao.getUserInfoByUserName(userName);
 			if( user == null){
-				return getErrorJson("用户不存在").toString();
+				return getErrorJson("用户不存在", cod).toString();
 			}else{
 				if(0!=user.getPassword().compareTo(passWord)){
-					return getErrorJson("密码错误").toString();
+					return getErrorJson("密码错误", cod).toString();
 				}
 			}
 			userDao.updateLoginTime(user.getId());
-			request.getSession().setAttribute("User", userName);
+			request.getSession().setAttribute("User", user);
 			pld = new JSONObject();
 			pld.put("LastLoginTime", user.getLastLoginTime());
 		} catch (Exception e) {
@@ -195,10 +227,10 @@ public class ActionHandler {
 			JSONObject prm = requestJSON.getJSONObject("prm");
 			String pass = prm.getString("PassWord");
 			newPass = prm.getString("NewPassWord");
-			String username = request.getSession().getAttribute("User").toString();
+			String username = ((User)request.getSession().getAttribute("User")).getUsername();
 			user = userDao.getUserInfoByUserName(username);
 			if(0!=pass.compareTo(user.getPassword())){
-				return getErrorJson("原密码错误").toString();
+				return getErrorJson("原密码错误", cod).toString();
 			}
 		} catch (Exception e) {
 			

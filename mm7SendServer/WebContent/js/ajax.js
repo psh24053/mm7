@@ -61,10 +61,10 @@ function Ajax(Settings){
 }
 var ajax = new Object();
 /**
- * 获取work列表
- * @cod 100
- * @param start
- * @param count
+ * 用户登录
+ * @cod 101
+ * @param UserName
+ * @param PassWord
  * @param success
  * @param error
  * @param before
@@ -77,10 +77,82 @@ ajax.action_101_userlogin = function(opts){
 		Error: opts.error,
 		prm: {
 			UserName : opts.UserName,
-			PassWord : opts.PassWord,
-			grade : opts.grade
+			PassWord : opts.PassWord
 		}
 	}).send(opts.before);
 };
+/**
+ * 用户退出
+ * @cod 102
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_102_userlogin = function(opts){
+	
+	new Ajax({
+		ActionCode: 102,
+		Success: opts.success,
+		Error: opts.error
+	}).send(opts.before);
+};
+/**
+ * 修改密码
+ * @cod 103
+ * @param PassWord
+ * @param NewPassWord
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_103_modifypassword = function(opts){
+	
+	new Ajax({
+		ActionCode: 103,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+			PassWord: opts.PassWord,
+			NewPassWord: opts.NewPassWord
+		}
+	}).send(opts.before);
+};
+/**
+ * 获取用户列表
+ * @cod 104
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_104_getuserlist = function(opts){
+	
+	new Ajax({
+		ActionCode: 104,
+		Success: opts.success,
+		Error: opts.error
+	}).send(opts.before);
+};
 
-
+/**
+ * 增加用户
+ * @cod 105
+ * @param UserName
+ * @param PassWord
+ * @param grade
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_105_adduser = function(opts){
+	
+	new Ajax({
+		ActionCode: 105,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+			UserName: opts.UserName,
+			PassWord: opts.PassWord,
+			grade: opts.grade
+		}
+	}).send(opts.before);
+};

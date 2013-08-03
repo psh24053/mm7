@@ -39,7 +39,7 @@ public class MyReceiver extends MM7Receiver {
 //		submitReq.addTo("18581864897");
 		submitReq.addTo("18684012650");
 		
-		submitReq.setDeliveryReport(false);
+		submitReq.setDeliveryReport(true);
 //		submitReq.setSubject("测试");
 		
 		MMContent content = new MMContent();

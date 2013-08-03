@@ -4,6 +4,7 @@
  */
 function logout(){
 	localStorage.removeItem('User');
+//	ajax.action_102_userlogin();
 }
 /**
  * 浏览器支持判断

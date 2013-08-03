@@ -5,9 +5,11 @@
 	float: left;
 }
 .content_main{
-	width: 75%;
+	width: 80%;
 	float: left;
-	margin-left: 7%;
+	margin-left: 3%;
+	padding: 5px;
+	height: 100%;
 }
 .content_img{
 	border: 1px #cccccc solid;

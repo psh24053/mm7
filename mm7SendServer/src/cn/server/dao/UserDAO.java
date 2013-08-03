@@ -65,12 +65,13 @@ public class UserDAO {
 			@Override
 			public Object doExecute() throws Exception {
 				User user = null;
-				String sql = "SELECT * FROM mm7_user WHERE username = ?;";
+				String sql = "SELECT * FROM mm7_user WHERE username = ?";
 				try {
 					stat = conn.prepareStatement(sql);
 					stat.setObject(1, userName);
 					rs = stat.executeQuery();
 					if(rs.next()){
+						user = new User();
 						user.setId(rs.getInt("userId"));
 						user.setUsername(rs.getString("username"));
 						user.setPassword(rs.getString("password"));

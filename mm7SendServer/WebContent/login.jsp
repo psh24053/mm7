@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>登录</title>
-<link rel="stylesheet" href="jqm/jquery.mobile-1.3.2.min.css" />
-<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="css/mm7.css" />
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="jqm/jquery.mobile-1.3.2.min.js"></script>
-<script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
-<script src="js/ajax.js"></script>
-<script src="js/mm7.js"></script>
-</head>
-<body>
+<%@ include file="header.jsp"%>
+
 <div data-role="page" id="login" data-theme="b">
 	<script type="text/javascript">
 	$('#login').bind('pagecreate', function(){
@@ -23,7 +11,7 @@
 		}else{
 			//判断是否登录
 			if(isLogin()){
-				$.mobile.changePage('index.html'); 
+				$.mobile.changePage('index.jsp'); 
 			}else{
 				initEvent_Login();
 			}
@@ -69,7 +57,30 @@
 			return;
 		}
 		
-		// 模拟登录
+		ajax.action_101_userlogin({
+			UserName: username,
+			PassWord: $.md5(password),
+			success: function(data){
+				if(data.res){
+					// 登录成功后调用
+					var user = new Object();
+					user.username = username;
+					
+					loginSuccess(user);
+				}else{
+					alert(data.pld.errorMsg);
+				}	
+				$.mobile.loading('hide');
+			},
+			error: function(data){
+				console.debug(data);
+				alert('请求失败.');
+				$.mobile.loading('hide');
+			}
+		});
+		
+		
+		/* // 模拟登录
 		if(username == 'admin' && password == 'admin'){
 			$.mobile.loading('hide');
 			// 登录成功后调用
@@ -82,7 +93,7 @@
 			$.mobile.loading('hide');
 			alert('用户名或密码错误');
 			return;
-		}
+		} */
 		
 		
 		
@@ -95,33 +106,33 @@
 	function loginSuccess(user){
 		
 		localStorage.setItem('User', user);
-		$.mobile.changePage('index.html'); 
+		$.mobile.changePage('index.jsp'); 
 		
 	}
 	</script>
-	
-	
-	
-		<div data-role="header">
-			<h1>登　录</h1>
-		</div>
 
-		<div data-role="content">
-			<form action="">
-				<div data-role="fieldcontain">
-					<label for="login_username">用户名</label> <input name=""
-						id="login_username" placeholder="" value="" type="text">
-				</div>
-				<div data-role="fieldcontain">
-					<label for="login_password">密码</label> <input name=""
-						id="login_password" placeholder="" value="" type="password">
-				</div>
-				<a data-role="button" id="login_button">登录 </a>
-			</form>
-		</div>
-		<div data-role="footer" data-theme="c">
-			<p style="text-align: center">By Panshihao.Cn</p>
-		</div>
+
+
+	<div data-role="header">
+		<h1>登 录</h1>
 	</div>
-</body>
-</html>
+
+	<div data-role="content">
+		<form action="">
+			<div data-role="fieldcontain">
+				<label for="login_username">用户名</label> <input name=""
+					id="login_username" placeholder="" value="" type="text">
+			</div>
+			<div data-role="fieldcontain">
+				<label for="login_password">密码</label> <input name=""
+					id="login_password" placeholder="" value="" type="password">
+			</div>
+			<a data-role="button" id="login_button">登录 </a>
+		</form>
+	</div>
+	<div data-role="footer" data-theme="c">
+		<p style="text-align: center">By Panshihao.Cn</p>
+	</div>
+</div>
+
+<%@ include file="footer.jsp"%>
