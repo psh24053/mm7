@@ -156,3 +156,22 @@ ajax.action_105_adduser = function(opts){
 		}
 	}).send(opts.before);
 };
+/**
+ * 删除用户
+ * @cod 106
+ * @param UserID
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_106_deleteuser = function(opts){
+	
+	new Ajax({
+		ActionCode: 106,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+			UserID: opts.UserID
+		}
+	}).send(opts.before);
+};

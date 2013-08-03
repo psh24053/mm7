@@ -32,9 +32,7 @@
 	
 <div class="content_menu">
 	<div data-role="collapsible" data-collapsed="false">
-		<h3>
-			操作菜单
-		</h3>
+		<h3>操作菜单</h3>
 		<ul data-role="listview" data-theme="c" data-dividertheme="d">
 			<li <%=indexStr %>><a href="index.jsp">首页</a></li>
 			<li data-role="list-divider" role="heading">彩信功能</li>

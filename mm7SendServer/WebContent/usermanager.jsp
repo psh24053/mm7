@@ -105,7 +105,35 @@ function userItemClick(event){
 	    buttons : {
 		  '删除': {
 		        click: function () { 
-		       		  console.debug(pthis);
+		        	$.mobile.loading( 'show', {
+		      		  text: '正在加载...',
+		      		  textVisible: true,
+		      		  theme: 'a',
+		      		  textonly: false,
+		      		  html: ''
+		      		});
+		        	var user = $(pthis).data('user');
+		        	
+		       		ajax.action_106_deleteuser({
+		       			UserID: user.UserID,
+		       			success: function(data){
+		       				$.mobile.loading('hide');
+		       				
+		       				if(data.res){
+		       					alert('删除成功');
+		        				loadUserList();
+								$('#userlist').listview('refresh');
+		       				}else{
+		       					alert(data.pld.errorMsg);
+		       				}
+		       				
+		       			},
+		       			error: function(data){
+		       				$.mobile.loading('hide');
+		       				alert('请求失败.');
+		       				
+		       			}
+		       		});
 		        },
 		        icon: "delete",
 		        theme: "c"
