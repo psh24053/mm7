@@ -50,7 +50,7 @@ function openTaskInfo(obj){
 }
 </script>
 	<div data-role="header">
-		<h1>查看彩信任务</h1>
+		<h1>查看短信任务</h1>
 		<a data-role="button" class="logout_button" data-icon="back"
 			href="login.jsp" data-iconpos="left" class="ui-btn-left">退出 </a>
 	</div>
@@ -59,7 +59,7 @@ function openTaskInfo(obj){
 	<div data-role="content">
 
 		<jsp:include page="menu.jsp">
-			<jsp:param value="showsendtask" name="id"/>
+			<jsp:param value="showsmctask" name="id"/>
 		</jsp:include>
 
 		<div class="content_main">

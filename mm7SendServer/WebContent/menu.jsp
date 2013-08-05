@@ -11,7 +11,9 @@
 	String showFailListStr = "";
 	String modifyPasswordStr = "";
 	String userManagerStr = "";
-	
+	String createSmcTaskStr = "";
+	String showSmcTaskStr = "";
+	String showSmcFailListStr = "";
 	if(id == null){
 		indexStr = "data-theme=\"b\"";
 	}else if(id.equals("index")){
@@ -26,6 +28,12 @@
 		modifyPasswordStr = "data-theme=\"b\"";
 	}else if(id.equals("usermanager")){
 		userManagerStr = "data-theme=\"b\"";
+	}else if(id.equals("createsmctask")){
+		createSmcTaskStr = "data-theme=\"b\"";
+	}else if(id.equals("showsmctask")){
+		showSmcTaskStr = "data-theme=\"b\"";
+	}else if(id.equals("showsmcfaillist")){
+		showSmcFailListStr = "data-theme=\"b\"";
 	}
 
 %>	
@@ -36,9 +44,13 @@
 		<ul data-role="listview" data-theme="c" data-dividertheme="d">
 			<li <%=indexStr %>><a href="index.jsp">首页</a></li>
 			<li data-role="list-divider" role="heading">彩信功能</li>
-			<li <%=createSendTaskStr %>><a href="createsendtask.jsp">创建发送任务</a></li>
-			<li <%=showSendTaskStr %>><a href="showsendtask.jsp">查看发送任务</a></li>
+			<li <%=createSendTaskStr %>><a href="createsendtask.jsp">创建彩信任务</a></li>
+			<li <%=showSendTaskStr %>><a href="showsendtask.jsp">查看彩信任务</a></li>
 			<li <%=showFailListStr %>><a href="showfaillist.jsp">查看失败号码</a></li>
+			<li data-role="list-divider" role="heading">短信功能</li>
+			<li <%=createSmcTaskStr %>><a href="createsmctask.jsp">创建短信任务</a></li>
+			<li <%=showSmcTaskStr %>><a href="showsmctask.jsp">查看短信任务</a></li>
+			<li <%=showSmcFailListStr %>><a href="showsmcfaillist.jsp">查看失败号码</a></li>
 			<li data-role="list-divider" role="heading">系统功能</li>
 			<% 
 				User user = (User) session.getAttribute("User");

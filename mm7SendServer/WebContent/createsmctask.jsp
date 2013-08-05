@@ -222,7 +222,7 @@ function addImage(Url){
 }
 </script>
 	<div data-role="header">
-		<h1>创建彩信任务</h1>
+		<h1>创建短信任务</h1>
 		<a data-role="button" class="logout_button" data-icon="back"
 			href="login.jsp" data-iconpos="left" class="ui-btn-left">退出 </a>
 	</div>
@@ -231,7 +231,7 @@ function addImage(Url){
 	<div data-role="content">
 
 		<jsp:include page="menu.jsp">
-			<jsp:param value="createsendtask" name="id"/>
+			<jsp:param value="createsmctask" name="id"/>
 		</jsp:include>
 
 		<div class="content_main">
@@ -252,9 +252,11 @@ function addImage(Url){
 
 
 				<a id="create_addtext" data-icon="plus" data-role="button"
-					data-inline="true"> 文本内容 </a> <a data-role="button"
+					data-inline="true"> 文本内容 </a> 
+					<!-- <a data-role="button"
 					data-inline="true" id="create_addimage" data-icon="plus"
-					data-iconpos="left"> 图片内容 </a> <a data-role="button"
+					data-iconpos="left"> 图片内容 </a> --> 
+					<a data-role="button"
 					data-inline="true" id="mms_preview" data-icon="star"
 					data-iconpos="left"> 预览模式 </a>
 

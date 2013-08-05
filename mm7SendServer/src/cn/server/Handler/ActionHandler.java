@@ -94,6 +94,10 @@ public class ActionHandler {
 				responseStr = newSendTask(requestJSON, request, response);
 				break;
 			case 109:
+				responseStr = getFailNumberListByTaskID(requestJSON, request, response);
+				break;
+			case 110:
+				responseStr = getContentByTaskID(requestJSON, request, response);
 				break;
 			default:
 				break;
