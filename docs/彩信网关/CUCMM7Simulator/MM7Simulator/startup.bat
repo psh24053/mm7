@@ -1,1 +1,0 @@
-java -cp ..\bin\SimpleUMS.jar Simulator
