@@ -1,5 +1,6 @@
 package cn.server.Handler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.common.MyException;
+import cn.server.bean.Content;
+import cn.server.bean.Failnumber;
+import cn.server.bean.MyLimit;
+import cn.server.bean.SendTask;
 import cn.server.bean.User;
+import cn.server.dao.ContentDAO;
 import cn.server.dao.PhoneNumDAO;
 import cn.server.dao.SendTaskDAO;
 import cn.server.dao.UserDAO;
@@ -86,6 +92,8 @@ public class ActionHandler {
 				break;
 			case 108:
 				responseStr = newSendTask(requestJSON, request, response);
+				break;
+			case 109:
 				break;
 			default:
 				break;
@@ -280,10 +288,120 @@ public class ActionHandler {
 	public String getSendTaskList(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		int cod = 0;
-		int pageNum = 0;
-		int countLimit = 0;
+		int count = 0;
+		List<SendTask> list = new ArrayList<SendTask>();
+		SendTaskDAO sendTaskDao = new SendTaskDAO();
+		MyLimit limit = null;
 		JSONObject prm = new JSONObject();
-		return null;
+		JSONObject pld;
+		try {
+			cod = requestJSON.getInt("cod");
+			prm = requestJSON.getJSONObject("prm");
+			limit = new MyLimit(prm.getInt("PageNum"),prm.getInt("CountLimit"));
+			list = sendTaskDao.getSendTaskList(limit);
+			count = sendTaskDao.getAllCount();
+			pld = new JSONObject();
+			JSONArray ja = new JSONArray();
+			for (int i = 0; i < list.size(); i++) {
+				JSONObject temp = new JSONObject();
+				SendTask sendtask = list.get(i);
+				temp.put("sendTaskId", sendtask.getSendTaskId());
+				temp.put("name", sendtask.getName());
+				temp.put("createTime", sendtask.getCreateTime());
+				temp.put("toCount", sendtask.getToCount());
+				temp.put("state", sendtask.getState());
+				temp.put("successCount", sendtask.getSuccessCount());
+				temp.put("failCount", sendtask.getFailCount());
+				temp.put("completeTime", sendtask.getCompleteTime());
+				String customNumber = sendtask.getCustomTo();
+				String[] strArray = null;   
+			    strArray = customNumber.split(",");
+			    JSONArray tempja = new JSONArray();
+			    for (int j = 0; j < strArray.length; j++) {
+			    	tempja.put(strArray[i]);
+				}
+			    temp.put("CustomNumber", tempja);
+			    ja.put(temp);
+			}
+			 
+			 pld.put("CountNum", count);
+			 pld.put("TaskList", ja);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MyException("取得任务列表出现异常",e);
+		}
+		return getResponseJson(cod, true, pld).toString();
+	}
+	
+	public String getFailNumberListByTaskID(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		int id = 0;
+		int count = 0;
+		List<Failnumber> list = new ArrayList<Failnumber>();
+		PhoneNumDAO dao = new PhoneNumDAO();
+		JSONObject prm = new JSONObject();
+		JSONObject pld;
+		try {
+			cod = requestJSON.getInt("cod");
+			prm = requestJSON.getJSONObject("prm");
+			MyLimit limit = new MyLimit(prm.getInt("PageNum"),prm.getInt("CountLimit"));
+			id = prm.getInt("ID");
+			
+			list = dao.getFailPhoneNumList(id, limit);
+			count = dao.getAllCount();
+			pld = new JSONObject();
+			JSONArray ja = new JSONArray();
+			for (int i = 0; i < list.size(); i++) {
+				ja.put(list.get(i).getNumber());
+			}
+			pld.put("CountNum", count);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MyException("取得失败号码出现异常", e);
+		}
+		return getResponseJson(cod, true, pld).toString();
+	}
+	
+	public String getContentByTaskID(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		int id = 0;
+		List<Content> list = new ArrayList<Content>();
+		JSONObject prm = new JSONObject();
+		ContentDAO dao = new ContentDAO();
+		JSONObject pld = null;
+		try {
+			cod = requestJSON.getInt("cod");
+			prm = requestJSON.getJSONObject("prm");
+			id = prm.getInt("ID");
+			
+			list = dao.getContentListBySendTaskId(id);
+			
+			pld = new JSONObject();
+			JSONArray ja = new JSONArray();
+			for (int i = 0; i < list.size(); i++) {
+				Content content = list.get(i);
+				JSONObject temp = new JSONObject();
+				temp.put("ID", content.getContentId());
+				temp.put("Type", content.getContentType());
+				temp.put("Text", content.getContentByte());
+				temp.put("content", content.getContentByte());
+				temp.put("sort", content.getSort());
+				ja.put(temp);
+			}
+			pld.put("ID", id);
+			pld.put("content", ja);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MyException("取得彩信内容出现异常", e);
+		}
+		return getResponseJson(cod, true, pld).toString();
+		
+		
 	}
 	
 }
