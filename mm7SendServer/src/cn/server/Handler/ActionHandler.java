@@ -99,6 +99,15 @@ public class ActionHandler {
 			case 110:
 				responseStr = getContentByTaskID(requestJSON, request, response);
 				break;
+			case 111:
+				responseStr = getSmcTaskList(requestJSON, request, response);
+				break;
+			case 112:
+				responseStr = newSmcTask(requestJSON, request, response);
+				break;
+			case 113:
+				responseStr = getFailSmcNumberListByTaskID(requestJSON, request, response);
+				break;
 			default:
 				break;
 			}
@@ -406,6 +415,46 @@ public class ActionHandler {
 		return getResponseJson(cod, true, pld).toString();
 		
 		
+	}
+	
+	
+	
+	public String newSmcTask(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		JSONObject prm = new JSONObject();
+		SendTaskDAO sendTask = new SendTaskDAO();
+		PhoneNumDAO phoneNum = new PhoneNumDAO();
+		
+		cod = requestJSON.getInt("cod");
+		prm = requestJSON.getJSONObject("prm");
+		
+		return null;
+	}
+	
+	public String getSmcTaskList(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		JSONObject prm = new JSONObject();
+		SendTaskDAO sendTask = new SendTaskDAO();
+		PhoneNumDAO phoneNum = new PhoneNumDAO();
+		
+		cod = requestJSON.getInt("cod");
+		prm = requestJSON.getJSONObject("prm");
+		
+		return null;
+	}
+	public String getFailSmcNumberListByTaskID(JSONObject requestJSON,
+			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int cod = 0;
+		JSONObject prm = new JSONObject();
+		SendTaskDAO sendTask = new SendTaskDAO();
+		PhoneNumDAO phoneNum = new PhoneNumDAO();
+		
+		cod = requestJSON.getInt("cod");
+		prm = requestJSON.getJSONObject("prm");
+		
+		return null;
 	}
 	
 }
