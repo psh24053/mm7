@@ -175,3 +175,99 @@ ajax.action_106_deleteuser = function(opts){
 		}
 	}).send(opts.before);
 };
+/**
+ * 获取发送任务列表
+ * @cod 107
+ * @param PageNum
+ * @param CountLimit
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_107_getsendtasklist = function(opts){
+	
+	new Ajax({
+		ActionCode: 107,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+			PageNum: opts.PageNum,
+			CountLimit: opts.CountLimit
+		}
+	}).send(opts.before);
+};
+/**
+ * 创建彩信任务
+ * @cod 108
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_108_newsendtask = function(opts){
+	
+	new Ajax({
+		ActionCode: 108,
+		Success: opts.success,
+		Error: opts.error
+	}).send(opts.before);
+};
+/**
+ * 获取彩信失败号码列表
+ * @cod 109
+ * @param PageNum
+ * @param CountLimit
+ * @param ID
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_109_getfailnumberlist = function(opts){
+	
+	new Ajax({
+		ActionCode: 109,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+			PageNum: opts.PageNum,
+			CountLimit: opts.CountLimit,
+			ID: opts.ID
+		}
+	}).send(opts.before);
+};
+/**
+ * 获取彩信任务内容
+ * @cod 110
+ * @param ID
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_110_getcontentbytaskid = function(opts){
+	
+	new Ajax({
+		ActionCode: 110,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+			ID: opts.ID
+		}
+	}).send(opts.before);
+};
+/**
+ * 获取短信任务列表
+ * @cod 111
+ * @param ID
+ * @param success
+ * @param error
+ * @param before
+ */
+ajax.action_111_getsmctasklist = function(opts){
+	
+	new Ajax({
+		ActionCode: 111,
+		Success: opts.success,
+		Error: opts.error,
+		prm: {
+		}
+	}).send(opts.before);
+};

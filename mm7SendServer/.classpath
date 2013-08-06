@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="lib/webservices.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/xmlParserAPIs.jar"/>
+	<classpathentry kind="lib" path="lib/smproxyApi.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

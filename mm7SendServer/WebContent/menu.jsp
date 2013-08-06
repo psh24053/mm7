@@ -46,11 +46,11 @@
 			<li data-role="list-divider" role="heading">彩信功能</li>
 			<li <%=createSendTaskStr %>><a href="createsendtask.jsp">创建彩信任务</a></li>
 			<li <%=showSendTaskStr %>><a href="showsendtask.jsp">查看彩信任务</a></li>
-			<li <%=showFailListStr %>><a href="showfaillist.jsp">查看失败号码</a></li>
+			<%-- <li <%=showFailListStr %>><a href="showfaillist.jsp">查看失败号码</a></li> --%>
 			<li data-role="list-divider" role="heading">短信功能</li>
 			<li <%=createSmcTaskStr %>><a href="createsmctask.jsp">创建短信任务</a></li>
 			<li <%=showSmcTaskStr %>><a href="showsmctask.jsp">查看短信任务</a></li>
-			<li <%=showSmcFailListStr %>><a href="showsmcfaillist.jsp">查看失败号码</a></li>
+			<%-- <li <%=showSmcFailListStr %>><a href="showsmcfaillist.jsp">查看失败号码</a></li> --%>
 			<li data-role="list-divider" role="heading">系统功能</li>
 			<% 
 				User user = (User) session.getAttribute("User");
