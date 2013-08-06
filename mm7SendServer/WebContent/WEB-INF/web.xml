@@ -39,4 +39,17 @@
 	    <servlet-name>FileUpload</servlet-name>
 	    <url-pattern>/FileUpload</url-pattern>
     </servlet-mapping>
+    
+	<servlet>
+	    <description>   
+	    </description>
+	    <display-name>FileDownload</display-name>
+	    <servlet-name>FileDownload</servlet-name>
+	    <servlet-class>cn.server.servlet.FileDownload</servlet-class>
+    	<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>FileDownload</servlet-name>
+	    <url-pattern>/FileDownload</url-pattern>
+    </servlet-mapping>
 </web-app>

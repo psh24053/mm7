@@ -69,7 +69,7 @@ function openTaskInfo(obj){
 						itemA.append('<span class="content_Str">'+con.content+'</span>');
 						
 					}else if(con.Type == 2){
-						itemA.append('<img class="content_img" src="'+con.content+'" style="border: 1px #666666 solid;max-width: 500px;" />');
+						itemA.append('<img class="content_img" src="FileDownload?filename='+con.content+'" style="border: 1px #666666 solid;max-width: 500px;" />');
 					}
 					
 					item.append(itemA);
