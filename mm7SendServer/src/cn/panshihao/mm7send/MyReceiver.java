@@ -1,5 +1,7 @@
 package cn.panshihao.mm7send;
 
+import java.util.Date;
+
 import com.cmcc.mm7.vasp.common.MMConstants;
 import com.cmcc.mm7.vasp.common.MMContent;
 import com.cmcc.mm7.vasp.conf.MM7Config;
@@ -38,31 +40,36 @@ public class MyReceiver extends MM7Receiver {
 		
 //		submitReq.addTo("18581864897");
 		submitReq.addTo("18684012650");
+		submitReq.addCc("18583937907");
+//		submitReq.addTo("13183805069");
 		
 		submitReq.setDeliveryReport(true);
-//		submitReq.setSubject("测试");
+		submitReq.setSubject("This is 主题");
+//		submitReq.setChargedParty((byte)4);
 		
 		MMContent content = new MMContent();
-		
 		content.setContentType(MMConstants.ContentType.MULTIPART_MIXED);
 		
-		MMContent text = MMContent.createFromString("我和我的小伙伴都惊呆了。");
-		text.setContentType(MMConstants.ContentType. TEXT); //一定要设置
-		content.addSubContent(text);
+		MMContent text = MMContent.createFromString("骚扰running，编号000000008");
+		text.setContentType(MMConstants.ContentType.TEXT); //一定要设置
+		text.setContentID("1.text");
+		content.addSubContent(text); 
 		
-//		MMContent img= MMContent.createFromFile("e:\\logo.png");
-//		img.setContentType(MMConstants.ContentType.PNG);
-//		img.setContentID("logo.png");
-//		content.addSubContent(img);
+		MMContent img= MMContent.createFromFile("e:\\logo.png");
+		img.setContentType(MMConstants.ContentType.PNG);
+		img.setContentID("2.png");
+		content.addSubContent(img);
 		
+		Date d = new Date();
+		System.out.println(d.getTime());
+		submitReq.setTimeStamp(d);
 		submitReq.setContent(content);
-		
 		MM7RSRes res = mm7Sender.send(submitReq);
 		System.out.println("res.statuscode=" + res.getStatusCode() +
 				";res.statusText=" + res.getStatusText());
 		
 		// 启动接收器
-		receiver.start();
+//		receiver.start();
 	}
 
 	public MM7VASPRes doDeliver(MM7DeliverReq request) {
@@ -72,6 +79,7 @@ public class MyReceiver extends MM7Receiver {
 		deliverReq = request;
 		System.out.println("收到手机" + request.getSender() + "提交的消息，标题为："
 				+ request.getSubject());
+		
 		// 企业需要进行一些处理，例如构建MM7DeliverRes消息，设置ServiceCode或StatusCode
 		MM7DeliverRes mm7DeliverRes = new MM7DeliverRes();
 		mm7DeliverRes.setServiceCode("3181011200"); // 设置ServiceCode，可选
