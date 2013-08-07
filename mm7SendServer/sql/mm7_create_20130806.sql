@@ -82,6 +82,7 @@ DROP TABLE IF EXISTS `mm7_smctask`;
 
 CREATE TABLE `mm7_smctask` (
   `smcId` int(6) NOT NULL auto_increment COMMENT '主键',
+  `name` text collate utf8_unicode_ci COMMENT '短信名称',
   `content` text collate utf8_unicode_ci COMMENT '短信内容',
   `createTime` datetime default NULL COMMENT '短信创建时间',
   `toCount` int(10) default NULL COMMENT '接收号码数量',
