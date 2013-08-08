@@ -15,6 +15,7 @@ import cn.server.bean.Content;
 import cn.server.bean.Failnumber;
 import cn.server.bean.MyLimit;
 import cn.server.bean.SendTask;
+import cn.server.bean.Smctask;
 import cn.server.bean.User;
 import cn.server.dao.ContentDAO;
 import cn.server.dao.PhoneNumDAO;
@@ -417,8 +418,7 @@ public class ActionHandler {
 		
 	}
 	
-	
-	
+
 	public String newSmcTask(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		int cod = 0;
@@ -435,14 +435,52 @@ public class ActionHandler {
 	public String getSmcTaskList(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		int cod = 0;
+		int count = 0;
+		MyLimit limit = null;
+		List <Smctask> list = new ArrayList<Smctask>();
 		JSONObject prm = new JSONObject();
-		SendTaskDAO sendTask = new SendTaskDAO();
+		JSONObject pld = new JSONObject();
+		SendTaskDAO dao = new SendTaskDAO();
 		PhoneNumDAO phoneNum = new PhoneNumDAO();
 		
-		cod = requestJSON.getInt("cod");
-		prm = requestJSON.getJSONObject("prm");
+		try {
+			cod = requestJSON.getInt("cod");
+			prm = requestJSON.getJSONObject("prm");
+			limit = new MyLimit(prm.getInt("PageNum"), prm.getInt("CountLimit"));
+			list = dao.getSmctaskList(limit);
+			count = dao.getSmctaskCount();
+			JSONArray ja = new JSONArray();
+			for (int i = 0; i < list.size(); i++) {
+				Smctask smctask = list.get(i);
+				JSONObject temp = new JSONObject();
+				temp.put("sendTaskId", smctask.getId());
+				temp.put("name", smctask.getName());
+				temp.put("createTime", smctask.getCreateTime());
+				temp.put("toCount", smctask.getToCount());
+				temp.put("state", smctask.getState());
+				temp.put("successCount", smctask.getSuccessCount());
+				temp.put("failCount", smctask.getFailCount());
+				temp.put("completeTime", smctask.getCompleteTime());
+				temp.put("content", smctask.getContent());
+				String customNumber = smctask.getCustomTo();
+				String[] strArray = null;   
+			    strArray = customNumber.split(",");
+			    JSONArray tempja = new JSONArray();
+			    for (int j = 0; j < strArray.length; j++) {
+			    	tempja.put(strArray[i]);
+				}
+			    temp.put("CustomNumber", tempja);
+			    ja.put(temp);
+			}
+			pld.put("SmcTaskList", ja);
+			pld.put("CountNum", count);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MyException("取得短信列表出现异常", e);
+		}
 		
-		return null;
+		return getResponseJson(cod, true, pld).toString();
 	}
 	public String getFailSmcNumberListByTaskID(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
