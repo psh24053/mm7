@@ -115,6 +115,7 @@ public class ActionHandler {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+			return getErrorJson(e.getMessage(), cod).toString();
 		}
 		return responseStr;
 	}
