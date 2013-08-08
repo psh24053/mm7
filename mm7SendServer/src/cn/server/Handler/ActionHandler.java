@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.common.DBNUMINFO;
 import cn.common.MyException;
 import cn.server.bean.Content;
 import cn.server.bean.Failnumber;
@@ -18,6 +19,7 @@ import cn.server.bean.SendTask;
 import cn.server.bean.Smctask;
 import cn.server.bean.User;
 import cn.server.dao.ContentDAO;
+import cn.server.dao.DBNumber;
 import cn.server.dao.PhoneNumDAO;
 import cn.server.dao.SendTaskDAO;
 import cn.server.dao.UserDAO;
@@ -289,14 +291,33 @@ public class ActionHandler {
 	
 	public String newSendTask(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
-		int cod = 0;
-		JSONObject prm = new JSONObject();
-		SendTaskDAO sendTask = new SendTaskDAO();
-		PhoneNumDAO phoneNum = new PhoneNumDAO();
 		
+		int cod = 0;
+		int numberCount = 0;
+		List<String> numberList = new ArrayList<String>();
+		List<String> customNumberList = new ArrayList<String>();
+		List<Content> contetList = new ArrayList<Content>();
+		JSONObject prm = new JSONObject();
+		SendTaskDAO sendTaskDao = new SendTaskDAO();
+		DBNumber dbNumberDao = new DBNumber();
+		numberCount = dbNumberDao.getAllCount();
+		int pageNum = numberCount/DBNUMINFO.MAX_SEND_MM7_NUM;
+		
+		numberList = dbNumberDao.getToNumberList(new MyLimit(pageNum, numberCount));
 		cod = requestJSON.getInt("cod");
 		prm = requestJSON.getJSONObject("prm");
-		
+		String name = prm.getString("name");
+		JSONArray customnumber = prm.getJSONArray("CustomNumber");
+		JSONArray contentArray = prm.getJSONArray("content");
+		for (int i = 0; i < customnumber.length(); i++) {
+			customNumberList.add(customnumber.getString(i));
+		}
+		for (int i = 0; i < contentArray.length(); i++) {
+			JSONObject temp = contentArray.getJSONObject(i);
+			Content content = new Content();
+			content.setContentByte(temp.getString(""));
+		}
+		numberList = dbNumberDao.getToNumberList(new MyLimit(pageNum, numberCount));
 		return null;
 	}
 	
