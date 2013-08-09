@@ -65,29 +65,7 @@ function initEvent_CreateSendTask(){
 		  });
 	});
 	
-	$('#create_addimage').on('tap', function(event){
-		$('<div>').simpledialog2({
-		    mode: 'button',
-		    width: '50%',
-		    headerText: '增加图文内容',
-		    headerClose: true,
-		    buttonPrompt: '<input type="file" />',
-		    buttons : {
-		      '上传': {
-		        click: function () { 
-					addImage('http://p8.qhimg.com/t018279469ca7df5d3c.jpg');		          
-		        }
-		      },
-		      '取消': {
-		        click: function () { 
-		          
-		        },
-		        icon: "delete",
-		        theme: "c"
-		      }
-		    }
-		  });
-	});
+	$('#create_addimage').on('tap', openUploadImage);
 	
 	
 	$('#mms_preview').on('tap', function(){
@@ -100,6 +78,57 @@ function initEvent_CreateSendTask(){
 			$('#content').css('width','360px');
 		}
 	});
+	
+	
+	$('#create_button').on('tap', function(){
+		alert('创建任务');
+	});
+	
+}
+/**
+ * 上传完成响应
+ */
+function uploadImageComplete(idx, filename){
+	addImage('FileDownload?filename='+filename);		 
+}
+/**
+ * 打开上传image窗口
+ */
+function openUploadImage(event){
+	
+	
+	var uploadDIV = $('#upload_div');
+	
+	var idx = random_char(8);
+	
+	uploadDIV.find('form').attr('action','FileUpload?idx='+idx);
+	
+	
+	
+	$('<div>').simpledialog2({
+	    mode: 'button',
+	    width: '50%',
+	    headerText: '增加图片内容',
+	    headerClose: true,
+	    buttonPrompt: uploadDIV.html(),
+	    buttons : {
+	      '取消': {
+	        click: function () { 
+	          
+	        },
+	        icon: "delete",
+	        theme: "c"
+	      }
+	    }
+	  });
+}
+
+function upload_submit(){
+	if($('#upload_div').find('form').find('input[type=file]').val() == undefined){
+		alert('请选择文件');
+	}else{
+		$.mobile.sdCurrentDialog.close();
+	}
 }
 /**
  * 增加文本内容
@@ -171,6 +200,7 @@ function openTextItemDialog(obj, main, str){
  * 打开image内容的dialog
  */
 function openImageItemDialog(obj, main, url){
+	
 	$('<div>').simpledialog2({
 	    mode: 'button',
 	    width: '50%',
@@ -294,6 +324,14 @@ function addImage(Url){
 		</div>
 	</div>
 	 -->
+	 
+<div id="upload_div" style="display: none;">
+	<form action="FileUpload" enctype="MULTIPART/FORM-DATA" onSubmit="parent.upload_submit();" target="post_frame" method="POST">
+			<iframe name="post_frame" id="post_frame" style="display:none;" mce_style="display:none;"></iframe>
+			<input name="FilePath" type="file" value="选择文件"/>
+			<input id="upload_submit"  type="submit" value="上传"/>
+	</form>
+</div>	 
 
 
 <%@ include file="footer.jsp"%>

@@ -17,6 +17,10 @@ import org.apache.tomcat.util.http.fileupload.FileUploadBase.SizeLimitExceededEx
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.json.JSONObject;
+
+import cn.common.MD5Code;
+
 
 
 
@@ -26,96 +30,76 @@ public class FileUpload extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
+		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+
 		PrintWriter out = response.getWriter();
+
+		String idx = request.getParameter("idx");
 		
-		try{
-			//判断上传的类型是否是 enctype="multipart/form-data"  true是  false表示不是 
-			boolean flag=ServletFileUpload.isMultipartContent(request);
-			if(flag){
-				/**
-				 * 创建生产FileItem的DiskFileItemFactory工厂的实例 
-				 * 设置内存缓冲区的大小 
-				 * 设置文件存放的临时路径 
-				 */
-				DiskFileItemFactory facoty = new DiskFileItemFactory();
-				//设置内存缓冲区的大小 
-				int sizeThreshold=3*1024*1024;
-				facoty.setSizeThreshold(sizeThreshold);
-				//设置文件存放的临时路径 
-				facoty.setRepository(new File("D:/tem"));
-				//创建ServletFileUpload实例,工厂作为参数 
-				ServletFileUpload upload = new ServletFileUpload(facoty);
-				//设置上传文件的大小,如果上传文件大于设置的大小，则要手动抛出SizeLimitExceededException 异常 
-				long sizeMax = 83*1024*1024;
-				upload.setSizeMax(sizeMax);
-				
-				//解析request请求,返回集合[集合中存放FileItem] 
-				List<FileItem> items = upload.parseRequest(request);
-				Iterator<FileItem> it = items.iterator();
-				while(it.hasNext()){
-					FileItem item = it.next();
+
+		// 获得磁盘文件条目工厂
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// 获取文件需要上传到的路径
+		String rootPath = getServletContext().getRealPath("/upload"); 
+
+		// 如果没以下两行设置的话，上传大的 文件 会占用 很多内存，
+		// 设置暂时存放的 存储室 , 这个存储室，可以和 最终存储文件 的目录不同
+		/**
+		 * 原理 它是先存到 暂时存储室，然后在真正写到 对应目录的硬盘上， 按理来说 当上传一个文件时，其实是上传了两份，第一个是以 .tem
+		 * 格式的 然后再将其真正写到 对应目录的硬盘上
+		 */
+		File uploadDir=new File(rootPath);
+		if(!uploadDir.exists()){
+			uploadDir.mkdirs();
+		}
+		factory.setRepository(uploadDir);
+		// 设置 缓存的大小，当上传文件的容量超过该缓存时，直接放到 暂时存储室
+		factory.setSizeThreshold(1024 * 1024);
+
+		// 高水平的API文件上传处理
+		ServletFileUpload upload = new ServletFileUpload(factory);
+
+		try {
+			// 可以上传多个文件
+			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
+
+			for (FileItem item : list) {
+				// 获取表单的属性名字
+				String fileName = item.getName();
+
+				// 如果获取的 表单信息是普通的 文本 信息
+				if (item.isFormField()) {
+				}
+				// 对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些
+				else {
+
 					
-					//如果是普通的表单域 
-					if(item.isFormField()){
-						//普通的表单域name属性的值
-						String fieldName = item.getFieldName();
-						//获得文本域中的内容时要注意转码，中文会出现中文乱码                 
-						// String value=new String(item.getString().getBytes("utf-8");
-						//普通的表单域value属性的值
-						String filedValue = item.getString();
-						System.out.println(fieldName+"   "+filedValue);
-					}else{
-						//如果是文件域  <input type="file"
-						//文件域name属性的值 
-						String fieldName = item.getFieldName();
-						//文件域value属性的值 
-						String fileName = item.getName();
-						//上传文件的类型 
-						String contentType = item.getContentType();
-						//true:来自内存,false:来自内存和硬盘 
-						boolean isInMemory = item.isInMemory();
-						//上传文件的字节数
-						long size = item.getSize();
-						System.out.println(fieldName +"  "+fileName +"  "+contentType+"    "+isInMemory+"    "+size);
-						
-						//获取文件的后缀名(如果没有后缀名lastIndexOf(".")=-1 )
-						if(fileName.lastIndexOf(".")!=-1){
-							String ext = fileName.substring(fileName.lastIndexOf(".")+1);
-							//设置允许上传的文件格式
-							String allowExt[]={"jpg","zip","doc","jpeg","png","gif","html","txt","xlsx","docx"}; 
-							//检测扩展名是否在数组中
-							List<String> list = Arrays.asList(allowExt);
-							if(!list.contains(ext)){
-								throw new RuntimeException("您上传的文件扩展名不允许");
-							}
-						}else{
-							throw new RuntimeException("您上传的文件没有扩展名,不允许上传"); 
-						}
-						//获取保存上传文件的路径 
-						String realpath=this.getServletContext().getRealPath("/upload");
-						System.out.println(realpath);
-						//方法一获取文件名:
-						//fileName=fileName.substring(fileName.lastIndexOf("\\")+1);
-						//方法二获取文件名:
-						File file=new File(fileName); 
-						fileName=file.getName(); 
-						System.out.println("截取后的文件名  "+fileName);
-						//保存上传文件
-						item.write(new File(realpath+File.separator+fileName));
+					String md5Name = MD5Code.getInstance().getCode(fileName+System.currentTimeMillis());
+					
+					// 真正写到磁盘上
+					// 它抛出的异常 用exception 捕捉
+					File f = new File(rootPath+File.separatorChar, md5Name);
+
+					if (!f.exists()) {
+						f.createNewFile();
 					}
+					item.write(f);// 第三方提供的
+					
+
+					JSONObject result=new JSONObject();
+					JSONObject payload=new JSONObject();
+					
+					responseJavaScript(out, "parent.uploadImageComplete('"+idx+"','"+md5Name+"')");
+
+					out.close();
 				}
 			}
-		}catch(SizeLimitExceededException e){
+
+		} catch (FileUploadException e) {
 			e.printStackTrace();
-			throw new RuntimeException("上传文件大小不能超过3M");
-		}catch(FileUploadException e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			out.close();
 		}
   
 	}
@@ -128,5 +112,14 @@ public class FileUpload extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		this.doGet(request, response);
+	}
+	
+	public void responseJavaScript(PrintWriter out, String js) {
+
+		out.write("<script type='text/javascript'>");
+		out.write(js);
+		out.write("</script>");
+		out.flush();
+
 	}
 }

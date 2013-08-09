@@ -199,6 +199,11 @@ ajax.action_107_getsendtasklist = function(opts){
 /**
  * 创建彩信任务
  * @cod 108
+ * @param name
+ * @param subject
+ * @param NumberCount
+ * @param CustomNumber
+ * @param content
  * @param success
  * @param error
  * @param before
@@ -208,7 +213,15 @@ ajax.action_108_newsendtask = function(opts){
 	new Ajax({
 		ActionCode: 108,
 		Success: opts.success,
-		Error: opts.error
+		Error: opts.error,
+		prm: {
+			name: opts.name,
+			subject: opts.subject,
+			NumberCount: opts.NumberCount,
+			CustomNumber: opts.CustomNumber,
+			content: opts.content
+		}
+	
 	}).send(opts.before);
 };
 /**
