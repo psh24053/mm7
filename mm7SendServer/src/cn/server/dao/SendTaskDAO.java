@@ -17,7 +17,7 @@ public class SendTaskDAO {
 			@Override
 			public Object doExecute() throws Exception {
 				int id = 0;
-				String sql1 = "INSERT INTO mm7_sendtask(mm7_sendtask.name,createTime,toCount,customTo,state,successCount,failCount)VALUES(?,NOW(),?,?,?,?,?);";
+				String sql1 = "INSERT INTO mm7_sendtask(mm7_sendtask.name,createTime,toCount,customTo,state,successCount,failCount,subject)VALUES(?,NOW(),?,?,?,?,?,?);";
 				String sql2 = "SELECT LAST_INSERT_ID();";
 				try {
 					stat = conn.prepareStatement(sql1);
@@ -27,6 +27,7 @@ public class SendTaskDAO {
 					stat.setObject(4, sendTask.getState());
 					stat.setObject(5, 0);
 					stat.setObject(6, 0);
+					stat.setObject(7, sendTask.getSubject());
 					stat.execute();
 					stat = conn.prepareStatement(sql2);
 					rs = stat.executeQuery();
@@ -111,7 +112,7 @@ public class SendTaskDAO {
 						task.setState(rs.getInt("state"));
 						task.setSuccessCount(rs.getInt("successCount"));
 						task.setToCount(rs.getInt("toCount"));
-						
+						task.setSubject(rs.getString("subject"));
 						list.add(task);
 						
 					}

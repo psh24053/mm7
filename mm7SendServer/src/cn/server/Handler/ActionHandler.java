@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import cn.common.DBNUMINFO;
 import cn.common.MyException;
+import cn.panshihao.mm7send.SendMM7;
 import cn.server.bean.Content;
 import cn.server.bean.Failnumber;
 import cn.server.bean.MyLimit;
@@ -292,33 +293,118 @@ public class ActionHandler {
 	public String newSendTask(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		
+		boolean bool = false;
 		int cod = 0;
 		int numberCount = 0;
-		List<String> numberList = new ArrayList<String>();
+		int taskID = 0;
+		int successCount = 0;
+		int failCount = 0;
+		
 		List<String> customNumberList = new ArrayList<String>();
-		List<Content> contetList = new ArrayList<Content>();
+		String customNumberstr = "";
+		List<Content> contentList = new ArrayList<Content>();
 		JSONObject prm = new JSONObject();
+		SendTask sendTask = new SendTask();
+		SendMM7 sendMM7 = null;
 		SendTaskDAO sendTaskDao = new SendTaskDAO();
 		DBNumber dbNumberDao = new DBNumber();
+		ContentDAO contentDAO = new ContentDAO();
 		numberCount = dbNumberDao.getAllCount();
-		int pageNum = numberCount/DBNUMINFO.MAX_SEND_MM7_NUM;
+		int allPageNum = 0;
 		
-		numberList = dbNumberDao.getToNumberList(new MyLimit(pageNum, numberCount));
-		cod = requestJSON.getInt("cod");
-		prm = requestJSON.getJSONObject("prm");
-		String name = prm.getString("name");
-		JSONArray customnumber = prm.getJSONArray("CustomNumber");
-		JSONArray contentArray = prm.getJSONArray("content");
-		for (int i = 0; i < customnumber.length(); i++) {
-			customNumberList.add(customnumber.getString(i));
+		if(numberCount/DBNUMINFO.MAX_SEND_MM7_NUM == 0 || numberCount == DBNUMINFO.MAX_SEND_MM7_NUM){
+			allPageNum = 1;
 		}
-		for (int i = 0; i < contentArray.length(); i++) {
-			JSONObject temp = contentArray.getJSONObject(i);
-			Content content = new Content();
-			content.setContentByte(temp.getString(""));
+		if(numberCount%DBNUMINFO.MAX_SEND_MM7_NUM == 0 && numberCount > DBNUMINFO.MAX_SEND_MM7_NUM){
+			allPageNum = numberCount/DBNUMINFO.MAX_SEND_MM7_NUM;
 		}
-		numberList = dbNumberDao.getToNumberList(new MyLimit(pageNum, numberCount));
-		return null;
+		if(numberCount%DBNUMINFO.MAX_SEND_MM7_NUM != 0 && numberCount > DBNUMINFO.MAX_SEND_MM7_NUM){
+			allPageNum = numberCount/DBNUMINFO.MAX_SEND_MM7_NUM + 1;
+		}
+		
+		//numberList = dbNumberDao.getToNumberList(new MyLimit(pageNum, numberCount));
+		try {
+			cod = requestJSON.getInt("cod");
+			prm = requestJSON.getJSONObject("prm");
+			String name = prm.getString("name");
+			String subject = prm.getString("subject");
+			
+			JSONArray customnumber = prm.getJSONArray("CustomNumber");
+			JSONArray contentArray = prm.getJSONArray("content");
+			
+			for (int i = 0; i < customnumber.length(); i++) {
+				customNumberList.add(customnumber.getString(i));
+			}
+			
+			
+			
+			
+			StringBuilder sb = new StringBuilder(); 
+			if(customNumberList != null  && customNumberList.size()>0){
+				for (int i = 0; i < customNumberList.size(); i++) {  
+			        if (i < customNumberList.size() - 1) {  
+			            sb.append(customNumberList.get(i) + ",");  
+			        } else {  
+			            sb.append(customNumberList.get(i));  
+			        }  
+			    }  
+			}
+			customNumberstr = sb.toString();
+			sendTask.setName(name);
+			sendTask.setSubject(subject);
+			sendTask.setToCount(numberCount+customnumber.length());
+			sendTask.setCustomTo(customNumberstr);
+			sendTask.setState(1);
+			
+			taskID = sendTaskDao.insertSendTask(sendTask);
+			
+			for (int i = 0; i < contentArray.length(); i++) {
+				JSONObject temp = contentArray.getJSONObject(i);
+				Content content = new Content();
+				if(temp.getInt("Type") ==1){
+					content.setContentByte(temp.getString("Text"));
+				}else if(temp.getInt("Type") ==2){
+					content.setContentByte(temp.getString("FilePath"));
+				}
+				content.setContentType(temp.getInt("Type"));
+				content.setSort(temp.getInt("sort"));
+				content.setSendTaskId(taskID);
+				contentDAO.insertContent(content);
+				contentList.add(content);
+			}
+			
+			
+			for (int i = 1; i <= allPageNum; i++) {
+				List<String> toNumbers = dbNumberDao.getToNumberList(new MyLimit(i, DBNUMINFO.MAX_SEND_MM7_NUM));
+				sendMM7 = new SendMM7(toNumbers, contentList, subject);
+				if(sendMM7.send() == true){
+					bool = true;
+					successCount = successCount+toNumbers.size();
+				}else{
+					failCount = failCount+toNumbers.size();
+				}
+			}
+			sendMM7 = new SendMM7(customNumberList, contentList, subject);
+			if(sendMM7.send() == true){
+				bool = true;
+				successCount = successCount+customNumberList.size();
+			}else{
+				failCount = failCount+customNumberList.size();
+			}
+			
+			
+			if(bool){
+				sendTaskDao.updateTask(taskID, successCount, failCount, 2);
+			}else{
+				sendTaskDao.updateTask(taskID, successCount, failCount, 3);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MyException("新建彩信任务异常", e);
+		}
+		
+		return getResponseJson(cod, bool, null).toString();
 	}
 	
 	public String getSendTaskList(JSONObject requestJSON,
@@ -349,6 +435,7 @@ public class ActionHandler {
 				temp.put("successCount", sendtask.getSuccessCount());
 				temp.put("failCount", sendtask.getFailCount());
 				temp.put("completeTime", sendtask.getCompleteTime());
+				temp.put("subject", sendtask.getSubject());
 				String customNumber = sendtask.getCustomTo();
 				String[] strArray = null;   
 			    strArray = customNumber.split(",");

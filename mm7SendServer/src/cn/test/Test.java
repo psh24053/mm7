@@ -67,19 +67,25 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		SendTask send = new SendTask();
-		send.setName("哈哈");
-		send.setToCount(10000);
-		send.setCustomTo("1,2,3,4,5");
-		send.setState(1);
+//		SendTask send = new SendTask();
+//		send.setName("哈哈");
+//		send.setToCount(10000);
+//		send.setCustomTo("1,2,3,4,5");
+//		send.setState(1);
+//		
+//		SendTaskDAO s = new SendTaskDAO();
+//		try {
+//			System.out.println(s.insertSendTask(send));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		List list = new ArrayList<>();
+		list.add("haha");
+		list.add("hehe");
+		list.add("huhu");
 		
-		SendTaskDAO s = new SendTaskDAO();
-		try {
-			System.out.println(s.insertSendTask(send));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(list.toString());
 	}
 
 }

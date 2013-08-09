@@ -4,6 +4,7 @@ public class SendTask {
 	
 	private int sendTaskId;
 	private String name;
+	private String subject;
 	private String createTime;
 	private int toCount;
 	private String customTo;
@@ -64,6 +65,12 @@ public class SendTask {
 	}
 	public void setCompleteTime(String completeTime) {
 		this.completeTime = completeTime;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	
 
