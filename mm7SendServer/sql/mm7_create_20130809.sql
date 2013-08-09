@@ -27,9 +27,11 @@ CREATE TABLE `mm7_content` (
   `sendTaskId` int(6) default NULL COMMENT '所属发送任务',
   `sort` int(6) default NULL COMMENT '排序权重，从1开始',
   PRIMARY KEY  (`contentId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='彩信内容表';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='彩信内容表';
 
 /*Data for the table `mm7_content` */
+
+insert  into `mm7_content`(`contentId`,`contentType`,`contentByte`,`sendTaskId`,`sort`) values (1,1,'asdasldkaslaksdlkasldkasd',1,1),(2,1,'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',1,2),(3,1,'sga23123123123123',1,3);
 
 /*Table structure for table `mm7_failnumber` */
 
@@ -43,6 +45,19 @@ CREATE TABLE `mm7_failnumber` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='失败号码表';
 
 /*Data for the table `mm7_failnumber` */
+
+/*Table structure for table `mm7_number` */
+
+DROP TABLE IF EXISTS `mm7_number`;
+
+CREATE TABLE `mm7_number` (
+  `numberId` int(6) NOT NULL auto_increment COMMENT '主键',
+  `number` varchar(32) collate utf8_unicode_ci default NULL COMMENT '号码',
+  PRIMARY KEY  (`numberId`),
+  UNIQUE KEY `number_unique` (`number`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='号码表';
+
+/*Data for the table `mm7_number` */
 
 /*Table structure for table `mm7_sendtask` */
 
@@ -58,10 +73,13 @@ CREATE TABLE `mm7_sendtask` (
   `successCount` int(10) default NULL COMMENT '成功数量',
   `failCount` int(10) default NULL COMMENT '失败数量',
   `completeTime` datetime default NULL COMMENT '完成时间',
+  `subject` text collate utf8_unicode_ci COMMENT '任务内容标题',
   PRIMARY KEY  (`sendTaskId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='发送任务表';
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='发送任务表';
 
 /*Data for the table `mm7_sendtask` */
+
+insert  into `mm7_sendtask`(`sendTaskId`,`name`,`createTime`,`toCount`,`customTo`,`state`,`successCount`,`failCount`,`completeTime`,`subject`) values (1,'任务a','2013-08-06 22:29:38',20000,'18684012650',1,1,1,'2013-08-07 22:29:58',NULL);
 
 /*Table structure for table `mm7_smcfailnumber` */
 
@@ -82,7 +100,6 @@ DROP TABLE IF EXISTS `mm7_smctask`;
 
 CREATE TABLE `mm7_smctask` (
   `smcId` int(6) NOT NULL auto_increment COMMENT '主键',
-  `name` text collate utf8_unicode_ci COMMENT '短信名称',
   `content` text collate utf8_unicode_ci COMMENT '短信内容',
   `createTime` datetime default NULL COMMENT '短信创建时间',
   `toCount` int(10) default NULL COMMENT '接收号码数量',
@@ -91,6 +108,7 @@ CREATE TABLE `mm7_smctask` (
   `successCount` int(10) default NULL COMMENT '成功数量',
   `failCount` int(10) default NULL COMMENT '失败数量',
   `completeTime` datetime default NULL COMMENT '完成时间',
+  `subject` text collate utf8_unicode_ci COMMENT '短信主题',
   PRIMARY KEY  (`smcId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='短信任务表';
 
@@ -111,7 +129,7 @@ CREATE TABLE `mm7_user` (
 
 /*Data for the table `mm7_user` */
 
-insert  into `mm7_user`(`userId`,`username`,`password`,`lastLoginTime`,`grade`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','2013-08-05 23:45:51',3);
+insert  into `mm7_user`(`userId`,`username`,`password`,`lastLoginTime`,`grade`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','2013-08-09 15:18:24',3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
