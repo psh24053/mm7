@@ -64,11 +64,11 @@ public class SendMM7 {
 		}
 		MM7SubmitReq submitReq = new MM7SubmitReq();
 		
-		submitReq.setTransactionID("100001");
-		submitReq.setVASPID("71565");
-		submitReq.setVASID("10628973");
-		submitReq.setServiceCode("3181011200");
-		submitReq.setSenderAddress("10628973");
+		submitReq.setTransactionID(SPINFO.MM7_TransactionID);
+		submitReq.setVASPID(SPINFO.MM7_VASPID);
+		submitReq.setVASID(SPINFO.MM7_VASID);
+		submitReq.setServiceCode(SPINFO.MM7_ServiceCode);
+		submitReq.setSenderAddress(SPINFO.MM7_SenderAddress);
 		
 		// 设置接收号码
 		submitReq.setTo(toList);

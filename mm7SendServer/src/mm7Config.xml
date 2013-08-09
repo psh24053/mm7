@@ -3,7 +3,7 @@
 	<AuthenticationMode>0</AuthenticationMode>
 	<UserName>10628973</UserName>
 	<Password>10628973</Password>
-	<MaxMessageSize>100000</MaxMessageSize>
+	<MaxMessageSize>200000</MaxMessageSize>
 	<LogPath>d:\vas_log</LogPath>
 	<logLevel>1</logLevel>
 	<LogNum>100</LogNum>

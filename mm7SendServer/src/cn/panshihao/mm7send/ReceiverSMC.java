@@ -144,9 +144,22 @@ public class ReceiverSMC {
 					Bind bind = (Bind) temp;
 					bind.readbody();
 					
+					if(bind.GetLoginName().equals(SPINFO.SGIP_SMG_NAME) &&
+							bind.GetLoginPassword().equals(SPINFO.SGIP_SMG_PASSWORD)){
+						
+						result = ResultCode.success;
+						
+						System.out.println("SGIP_BIND -> Login Success");
+						
+					}else{
+						result = ResultCode.faillogin;
+						
+						System.out.println("SGIP_BIND -> Login Fail");
+					}
+					
 					
 					if(listener != null){
-						result = listener.onBind(bind);
+						listener.onBind(bind);
 					}
 					
 					BindResp bindResp = new BindResp(SPINFO.SGIP_NODEID);
@@ -226,6 +239,7 @@ public class ReceiverSMC {
 	public class ResultCode{
 	
 		public static final int success = 1;
+		public static final int faillogin = 2;
 	}
 	
 }

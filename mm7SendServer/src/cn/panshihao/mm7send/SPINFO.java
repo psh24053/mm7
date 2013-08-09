@@ -21,4 +21,7 @@ public class SPINFO {
 	public static final String SGIP_HOST = "119.6.251.211";
 	public static final int SGIP_PORT = 8801;
 	public static final int SGIP_SP_PORT = 8801;
+	public static final String SGIP_SMG_NAME = "10628973";
+	public static final String SGIP_SMG_PASSWORD = "10628973";
+	
 }
