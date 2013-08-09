@@ -356,7 +356,7 @@ public class ActionHandler {
 			sendTask.setCustomTo(customNumberstr);
 			sendTask.setState(1);
 			
-			taskID = sendTaskDao.insertSendTask(sendTask);
+			taskID = sendTaskDao.insertSendTask(sendTask);//新建任务
 			
 			for (int i = 0; i < contentArray.length(); i++) {
 				JSONObject temp = contentArray.getJSONObject(i);
@@ -369,11 +369,11 @@ public class ActionHandler {
 				content.setContentType(temp.getInt("Type"));
 				content.setSort(temp.getInt("sort"));
 				content.setSendTaskId(taskID);
-				contentDAO.insertContent(content);
+				contentDAO.insertContent(content);//保存内容
 				contentList.add(content);
 			}
 			
-			
+			//分次发送
 			for (int i = 1; i <= allPageNum; i++) {
 				List<String> toNumbers = dbNumberDao.getToNumberList(new MyLimit(i, DBNUMINFO.MAX_SEND_MM7_NUM));
 				sendMM7 = new SendMM7(toNumbers, contentList, subject);
@@ -384,6 +384,7 @@ public class ActionHandler {
 					failCount = failCount+toNumbers.size();
 				}
 			}
+			//发送定制号码
 			sendMM7 = new SendMM7(customNumberList, contentList, subject);
 			if(sendMM7.send() == true){
 				bool = true;
