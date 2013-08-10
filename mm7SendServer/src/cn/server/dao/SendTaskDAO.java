@@ -17,18 +17,18 @@ public class SendTaskDAO {
 			@Override
 			public Object doExecute() throws Exception {
 				int id = 0;
-				String sql1 = "INSERT INTO mm7_sendtask(mm7_sendtask.name,createTime,toCount,customTo,state,successCount,failCount,subject)VALUES(?,NOW(),?,?,?,?,?,?);";
+				String sql1 = "INSERT INTO mm7_sendtask(`name`,createTime,toCount,customTo,state,successCount,failCount,subject)VALUES(?,NOW(),?,?,?,?,?,?);";
 				String sql2 = "SELECT LAST_INSERT_ID();";
 				try {
 					stat = conn.prepareStatement(sql1);
-					stat.setObject(1, sendTask.getName());
-					stat.setObject(2, sendTask.getToCount());
-					stat.setObject(3, sendTask.getCustomTo());
-					stat.setObject(4, sendTask.getState());
-					stat.setObject(5, 0);
-					stat.setObject(6, 0);
-					stat.setObject(7, sendTask.getSubject());
-					stat.execute();
+					stat.setString(1, sendTask.getName());
+					stat.setInt(2, sendTask.getToCount());
+					stat.setString(3, sendTask.getCustomTo());
+					stat.setInt(4, sendTask.getState());
+					stat.setInt(5, 0);
+					stat.setInt(6, 0);
+					stat.setString(7, sendTask.getSubject());
+					stat.executeUpdate();
 					stat = conn.prepareStatement(sql2);
 					rs = stat.executeQuery();
 					while(rs.next()){

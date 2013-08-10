@@ -4,7 +4,7 @@
 	<UserName>10628973</UserName>
 	<Password>10628973</Password>
 	<MaxMessageSize>200000</MaxMessageSize>
-	<LogPath>d:\vas_log</LogPath>
+	<LogPath>e:\vas_log</LogPath>
 	<logLevel>1</logLevel>
 	<LogNum>100</LogNum>
 	<LogInterval>120</LogInterval>

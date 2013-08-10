@@ -13,7 +13,7 @@ public class SQLFactory {
 
 	private static ComboPooledDataSource ds = null;
 	
-	private static String url = "jdbc:mysql://localhost:3306/mm7?useUnicode=true&amp;characterEncoding=UTF-8";
+	private static String url = "jdbc:mysql://localhost:3306/mm7?useUnicode=true&characterEncoding=UTF-8";
 	private static String user = "root";
 	private static String pass = "root";
 	private static int min_size = 5;

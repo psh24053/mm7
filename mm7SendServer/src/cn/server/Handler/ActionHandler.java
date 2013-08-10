@@ -293,6 +293,9 @@ public class ActionHandler {
 	public String newSendTask(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
 		
+		System.out.println("json -> "+requestJSON.toString());
+		
+		
 		boolean bool = false;
 		int cod = 0;
 		int numberCount = 0;

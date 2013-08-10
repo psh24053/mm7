@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<vasp:MM7Config xmlns:vasp="http://mms.chinamobile.com/mm7ConfigSchema">
+	<AuthenticationMode>0</AuthenticationMode>
+	<UserName>zxme</UserName>
+	<Password>zxme</Password>
+	<MaxMessageSize>100000</MaxMessageSize>
+	<LogPath>E:\vas_log</LogPath>
+	<logLevel>0</logLevel>
+	<Charset>GB2312</Charset>
+	<mmscURL>/mm7</mmscURL>
+	<mmscIP>211.136.90.202</mmscIP>
+	<MmscID>910010</MmscID>
+	<UseSSL>true</UseSSL>
+	<ListenIP>211.136.90.244</ListenIP>
+	<ListenPort>80</ListenPort>
+	<BackLog>50</BackLog>
+	<TimeOut>90000</TimeOut>
+	<ReSendCount>2</ReSendCount>
+	<LogNum>100</LogNum>
+	<LogInterval>120</LogInterval>
+	<LogSize>1000</LogSize>
+</vasp:MM7Config>
