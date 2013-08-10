@@ -186,6 +186,7 @@ function openTextItemDialog(obj, main, str){
 		        	  return;
 		          }else{
 		        	  $(obj).find('.content_Str').text(inputContent);
+		        	  $(obj).data('text', inputContent);
 		          }
 	        }
 	      },
