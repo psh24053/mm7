@@ -7,6 +7,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
+import org.apache.catalina.core.ApplicationContext;
 import org.json.JSONObject;
 
 import sun.misc.Compare;
@@ -49,7 +52,7 @@ public class SendMM7 {
 	 * 执行发送请求，这可能是一个长时间的操作，成功发送返回true，发送失败返回false
 	 * @return
 	 */
-	public boolean send(){
+	public boolean send(ServletContext servletContext){
 		// 初始化VASP
 		MM7Config mm7Config = new MM7Config(SendMM7.class.getResource("/mm7Config.xml").getPath());
 		// 设置ConnConfig.xml文件的路径
@@ -115,7 +118,14 @@ public class SendMM7 {
 			}else if (item.getContentType() == 2){
 				
 				String filepath = item.getContentByte();
-				MMContent fileContent = MMContent.createFromFile(filepath);
+				
+				File file = new File(servletContext.getRealPath("/upload"),filepath);
+				if(!file.exists()){
+					continue;
+				}
+				
+				
+				MMContent fileContent = MMContent.createFromFile(file.getPath());
 				String fileSuffix = filepath.substring(filepath.lastIndexOf(".")+1);
 				if("gif".equals(fileSuffix.toLowerCase())){
 					fileContent.setContentType(MMConstants.ContentType.GIF);

@@ -80,16 +80,16 @@ function initEvent_CreateSendTask(){
 	});
 	
 	
-	$('#create_button').on('tap', function(){
-		alert('创建任务');
-	});
+	$('#create_button').on('tap', createTask);
 	
 }
+
 /**
  * 上传完成响应
  */
 function uploadImageComplete(idx, filename){
-	addImage('FileDownload?filename='+filename);		 
+	$.mobile.loading('hide');
+	addImage('FileDownload?filename='+filename,filename);		 
 }
 /**
  * 打开上传image窗口
@@ -127,6 +127,14 @@ function upload_submit(){
 	if($('#upload_div').find('form').find('input[type=file]').val() == undefined){
 		alert('请选择文件');
 	}else{
+		// 显示loading动画
+		$.mobile.loading( 'show', {
+			  text: '正在加载...',
+			  textVisible: true,
+			  theme: 'a',
+			  textonly: false,
+			  html: ''
+		});
 		$.mobile.sdCurrentDialog.close();
 	}
 }
@@ -139,6 +147,8 @@ function addText(Str){
 	
 	var item = $('<li/>');
 	item.attr('data-theme', 'c');
+	item.addClass('task_text_item');
+	item.data('text', Str);
 	var itemA = $('<a/>');
 	itemA.css('white-space', 'normal');
 	itemA.css('word-break', 'break-all');
@@ -229,11 +239,14 @@ function openImageItemDialog(obj, main, url){
  * 增加图片内容
  */
  
-function addImage(Url){
+function addImage(Url, fid){
 	var content = $('#content');
 	
 	var item = $('<li/>');
 	item.attr('data-theme', 'c');
+	item.addClass('task_image_item');
+	item.data('url',Url);
+	item.data('fid', fid);
 	var itemA = $('<a/>');
 	itemA.css('white-space', 'normal');
 	itemA.css('word-break', 'break-all');
@@ -249,6 +262,103 @@ function addImage(Url){
 	item.on('tap', function(){
 		openImageItemDialog(this, content, Url);
 	});
+}
+/**
+ * 创建任务
+ */
+function createTask(){
+	
+	var name = $('#name').val();
+	var NumberCount = $('#NumberCount').val();
+	var CustomNumber = $('#CustomNumber').val();
+	var subject = $('#subject').val();
+	
+	
+	if(name == undefined || name.length == 0){
+		alert('任务名称不能为空');
+		return;
+	}
+	if(subject == undefined || subject.length == 0){
+		alert('彩信主题不能为空');
+		return;
+	}
+	if(NumberCount == undefined || NumberCount.length == 0){
+		alert('接收号码总数不能为空');
+		return;
+	}
+	
+	var customlist = CustomNumber.split(',');
+	var taskTextList = $('#content .task_text_item');
+	var taskImageList = $('#content .task_image_item');
+	
+	if(taskTextList.size() == 0 && taskImageList.size() == 0){
+		alert('至少需要一条内容');
+		return;
+	}
+	var content = new Array();
+	
+	var index = 0;
+	
+	taskTextList.each(function(){
+		
+		var Str = $(this).data('text');
+		
+		var item = new Object();
+		item.Type = 1;
+		item.Text = Str;
+		item.FilePath = Str;
+		item.sort = index;
+		index++;
+		
+		content.push(item);
+	});
+	taskImageList.each(function(){
+		
+		var url = $(this).data('url');
+		var fid = $(this).data('fid');
+		
+		var item = new Object();
+		item.Type = 2;
+		item.Text = fid;
+		item.FilePath = fid;
+		item.sort = index;
+		index++;
+		
+		content.push(item);
+	});
+	// 显示loading动画
+	$.mobile.loading( 'show', {
+		  text: '正在加载...',
+		  textVisible: true,
+		  theme: 'a',
+		  textonly: false,
+		  html: ''
+	});
+	
+	ajax.action_108_newsendtask({
+		name: name,
+		subject: subject,
+		NumberCount: NumberCount,
+		CustomNumber: customlist,
+		content: content,
+		success: function(data){
+			$.mobile.loading('hide');
+			if(data.res){
+				console.debug(data);
+				alert('创建成功！');				
+			}else{
+				alert(data.pld.errorMsg);
+			}
+		},
+		error: function(){
+			$.mobile.loading('hide');
+			alert('请求失败..');
+		}
+		
+	});
+	
+	
+	
 }
 </script>
 	<div data-role="header">
@@ -269,6 +379,10 @@ function addImage(Url){
 			<form action="">
 				<div data-role="fieldcontain">
 					<label for="name"> 任务名称 </label> <input name="" id="name"
+						placeholder="" value="" type="text">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="subject"> 彩信主题 </label> <input name="" id="subject"
 						placeholder="" value="" type="text">
 				</div>
 				<div data-role="fieldcontain">

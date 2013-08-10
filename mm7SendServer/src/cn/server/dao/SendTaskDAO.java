@@ -100,10 +100,7 @@ public class SendTaskDAO {
 					rs = stat.executeQuery();
 					while(rs.next()){
 						SendTask task = new SendTask();
-						task.setCompleteTime(rs.getDate("completeTime").toString());
-						if(rs.getDate("completeTime") == null){
-							task.setCompleteTime("未结束");
-						}
+						task.setCompleteTime(rs.getDate("completeTime") != null ? rs.getDate("completeTime").toString() : "未结束");
 						task.setCreateTime(rs.getDate("createTime").toString());
 						task.setCustomTo(rs.getString("customTo"));
 						task.setFailCount(rs.getInt("failCount"));

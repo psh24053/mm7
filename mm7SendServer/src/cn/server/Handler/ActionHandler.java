@@ -377,7 +377,7 @@ public class ActionHandler {
 			for (int i = 1; i <= allPageNum; i++) {
 				List<String> toNumbers = dbNumberDao.getToNumberList(new MyLimit(i, DBNUMINFO.MAX_SEND_MM7_NUM));
 				sendMM7 = new SendMM7(toNumbers, contentList, subject);
-				if(sendMM7.send() == true){
+				if(sendMM7.send(request.getServletContext()) == true){
 					bool = true;
 					successCount = successCount+toNumbers.size();
 				}else{
@@ -386,7 +386,7 @@ public class ActionHandler {
 			}
 			//发送定制号码
 			sendMM7 = new SendMM7(customNumberList, contentList, subject);
-			if(sendMM7.send() == true){
+			if(sendMM7.send(request.getServletContext()) == true){
 				bool = true;
 				successCount = successCount+customNumberList.size();
 			}else{
@@ -442,7 +442,7 @@ public class ActionHandler {
 			    strArray = customNumber.split(",");
 			    JSONArray tempja = new JSONArray();
 			    for (int j = 0; j < strArray.length; j++) {
-			    	tempja.put(strArray[i]);
+			    	tempja.put(strArray[j]);
 				}
 			    temp.put("CustomNumber", tempja);
 			    ja.put(temp);

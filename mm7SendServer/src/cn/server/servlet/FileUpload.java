@@ -76,10 +76,11 @@ public class FileUpload extends HttpServlet {
 
 					
 					String md5Name = MD5Code.getInstance().getCode(fileName+System.currentTimeMillis());
+					String fiffux = fileName.substring(fileName.lastIndexOf("."));
 					
 					// 真正写到磁盘上
 					// 它抛出的异常 用exception 捕捉
-					File f = new File(rootPath+File.separatorChar, md5Name);
+					File f = new File(rootPath+File.separatorChar, md5Name+fiffux);
 
 					if (!f.exists()) {
 						f.createNewFile();
@@ -90,7 +91,7 @@ public class FileUpload extends HttpServlet {
 					JSONObject result=new JSONObject();
 					JSONObject payload=new JSONObject();
 					
-					responseJavaScript(out, "parent.uploadImageComplete('"+idx+"','"+md5Name+"')");
+					responseJavaScript(out, "parent.uploadImageComplete('"+idx+"','"+(md5Name+fiffux)+"')");
 
 					out.close();
 				}
