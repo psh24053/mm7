@@ -166,16 +166,11 @@ function changeListView(data){
 			completeTime = "未完成";
 			break;
 		case 2:
-			// 2代表正在重发
-			stateStr = "正在重发";
-			completeTime = "未完成";
-			break;
-		case 3:
 			// 3代表发送完成
 			stateStr = "发送完成";
 			completeTime = taskItem.completeTime;
 			break;
-		case 4:
+		case 3:
 			// 4代表发送失败
 			stateStr = "发送失败";
 			completeTime = "失败";
