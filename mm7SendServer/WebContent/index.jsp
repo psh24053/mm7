@@ -1,3 +1,4 @@
+<%@page import="cn.server.dao.DBNumber"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -46,7 +47,14 @@
 		<div class="content_main ui-bar-c ">
 
 			<h2>欢迎使用 联通彩信发送管理系统</h2>
-
+			
+			<h4>当前系统中共有：
+			<% 
+			
+			DBNumber db = new DBNumber();
+			out.print(db.getAllCount());
+			%>
+			个号码</h4>
 
 		</div>
 

@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -19,7 +20,7 @@ import spApi.Unbind;
 import spApi.UnbindResp;
 
 /**
- * ç›‘å¬çŸ­ä¿¡æ¶ˆæ¯
+ * ¼àÌı¶ÌĞÅÏûÏ¢
  * @author Panshihao
  *
  */
@@ -28,8 +29,9 @@ public class ReceiverSMC {
 	private ServerSocket serverSocket;
 	private receiverListener listener;
 	
+	
 	/**
-	 * ä¼ å…¥æ¥æ”¶äº‹ä»¶ç›‘å¬å™¨ï¼Œé€šè¿‡ç›‘å¬å™¨æ¥è¿›è¡Œæ“ä½œ
+	 * ´«Èë½ÓÊÕÊÂ¼ş¼àÌıÆ÷£¬Í¨¹ı¼àÌıÆ÷À´½øĞĞ²Ù×÷
 	 * @param listener
 	 */
 	public ReceiverSMC(receiverListener listener){
@@ -37,10 +39,12 @@ public class ReceiverSMC {
 	}
 	
 	/**
-	 * å¼€å§‹ç›‘å¬
+	 * ¿ªÊ¼¼àÌı
 	 * @throws IOException 
 	 */
 	public void startReceiver() throws IOException{
+		
+		System.out.println("Receiver SMC Start!");
 		
 		serverSocket = new ServerSocket(SPINFO.SGIP_SP_PORT);
 		
@@ -48,7 +52,7 @@ public class ReceiverSMC {
 			
 			Socket socket = serverSocket.accept();
 			
-			// å¯åŠ¨å¤„ç†çº¿ç¨‹
+			// Æô¶¯´¦ÀíÏß³Ì
 			new receiverThread(socket, socket.getRemoteSocketAddress().toString()).start();
 			
 		}
@@ -57,48 +61,49 @@ public class ReceiverSMC {
 		
 	}
 	/**
-	 * å…³é—­ç›‘å¬
+	 * ¹Ø±Õ¼àÌı
 	 * @throws IOException 
 	 */
 	public void closeReceiver() throws IOException{
 		if(serverSocket != null && !serverSocket.isClosed()){
+			System.out.println("Receiver SMC Close!");
 			serverSocket.close();
 		}
 		
 	}
 	/**
-	 * æ¥æ”¶ä¿¡æ¯ç›‘å¬å™¨
+	 * ½ÓÊÕĞÅÏ¢¼àÌıÆ÷
 	 * @author Panshihao
 	 *
 	 */
 	public interface receiverListener{
 		
 		/**
-		 * bindäº‹ä»¶æ¥ä¸´æ—¶è§¦å‘ï¼Œè¿”å›resultcode
+		 * bindÊÂ¼şÀ´ÁÙÊ±´¥·¢£¬·µ»Øresultcode
 		 * @param bind 
 		 * @return resultCode
 		 */
 		public int onBind(Bind bind);
 		/**
-		 * unbindäº‹ä»¶æ¥ä¸´æ—¶è§¦å‘
+		 * unbindÊÂ¼şÀ´ÁÙÊ±´¥·¢
 		 * @param unbind
 		 */
 		public void onUnBind(Unbind unbind);
 		/**
-		 * deliveräº‹ä»¶æ¥ä¸´æ—¶è§¦å‘ï¼Œè¿”å›resultcode
+		 * deliverÊÂ¼şÀ´ÁÙÊ±´¥·¢£¬·µ»Øresultcode
 		 * @param deliver
 		 * @return resultCode
 		 */
 		public int onDeliver(Deliver deliver);
 		/**
-		 * reportäº‹ä»¶æ¥ä¸´æ—¶è§¦å‘ï¼Œè¿”å›resultcode
+		 * reportÊÂ¼şÀ´ÁÙÊ±´¥·¢£¬·µ»Øresultcode
 		 * @param report
 		 * @return resultcode
 		 */
 		public int onReport(Report report);
 	}
 	/**
-	 * ç›‘å¬çº¿ç¨‹
+	 * ¼àÌıÏß³Ì
 	 * @author Panshihao
 	 *
 	 */
@@ -124,13 +129,15 @@ public class ReceiverSMC {
 			SGIP_Command command = new SGIP_Command(SPINFO.SGIP_NODEID);
 			SGIP_Command temp = null;
 			
-			// æ— é™å¾ªç¯è¯»å–
+			// ÎŞÏŞÑ­»·¶ÁÈ¡
 			while(run){
 				try {
 					temp = command.read(input);
 				} catch (IOException e) {
+					run = false;
 					e.printStackTrace();
 				} catch (Exception e) {
+					run = false;
 					e.printStackTrace();
 				}
 				int result = ResultCode.success;
@@ -143,6 +150,15 @@ public class ReceiverSMC {
 					
 					Bind bind = (Bind) temp;
 					bind.readbody();
+					String n = null;
+					try {
+						n = new String(bind.GetLoginName().getBytes("GBK"), "UTF-8");
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+					System.out.println("name   -> "+n);
+					
 					
 					if(bind.GetLoginName().equals(SPINFO.SGIP_SMG_NAME) &&
 							bind.GetLoginPassword().equals(SPINFO.SGIP_SMG_PASSWORD)){
@@ -163,7 +179,7 @@ public class ReceiverSMC {
 					}
 					
 					BindResp bindResp = new BindResp(SPINFO.SGIP_NODEID);
-					// è®¾ç½®resultç»“æœç 
+					// ÉèÖÃresult½á¹ûÂë
 					bindResp.SetResult(result);
 					bindResp.write(out);
 					
@@ -177,7 +193,7 @@ public class ReceiverSMC {
 						listener.onUnBind((Unbind)temp);
 					}	
 					
-					// å‘é€unBindè¯·æ±‚
+					// ·¢ËÍunBindÇëÇó
 					UnbindResp unbindresp = new UnbindResp(SPINFO.SGIP_NODEID);
 					unbindresp.write(out);
 					
@@ -196,7 +212,7 @@ public class ReceiverSMC {
 					}
 					
 					DeliverResp deliverresp = new DeliverResp(result, (int) SPINFO.SGIP_NODEID);
-					// è®¾ç½®resultç»“æœç 
+					// ÉèÖÃresult½á¹ûÂë
 					deliverresp.SetResult(result);
 					deliverresp.write(out);
 					
@@ -215,7 +231,7 @@ public class ReceiverSMC {
 					}
 					
 					ReportResp reportResp = new ReportResp(result, (int) SPINFO.SGIP_NODEID);
-					// è®¾ç½®resultç»“æœç 
+					// ÉèÖÃresult½á¹ûÂë
 					reportResp.SetResult(result);
 					reportResp.write(out);
 					
@@ -232,7 +248,7 @@ public class ReceiverSMC {
 		
 	}
 	/**
-	 * resultç»“æœç 
+	 * result½á¹ûÂë
 	 * @author Panshihao
 	 *
 	 */
