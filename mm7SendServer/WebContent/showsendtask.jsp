@@ -202,13 +202,10 @@ function changeListView(data){
 			sending.append(li);
 			break;
 		case 2:
-			// 2代表正在重发
-			break;
-		case 3:
 			// 3代表发送完成
 			sended.append(li);
 			break;
-		case 4:
+		case 3:
 			// 4代表发送失败
 			faild.append(li);
 			break;
