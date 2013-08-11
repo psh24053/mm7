@@ -152,7 +152,7 @@ public class SendTaskDAO {
 			@Override
 			public Object doExecute() throws Exception {
 				int id = 0;
-				String sql1 = "INSERT INTO mm7_smctask mm7_smctask （mm7_smctask.name,content,createTime,toCount,customTo,state,successCount,failCount）VALUES (?,?,NOW(),?,?,?,?,?)";
+				String sql1 = "INSERT INTO mm7_smctask mm7_smctask （mm7_smctask.name,content,createTime,toCount,customTo,state,successCount,failCount,subject）VALUES (?,?,NOW(),?,?,?,?,?,?)";
 				String sql2 = "SELECT LAST_INSERT_ID();";
 				try {
 					stat = conn.prepareStatement(sql1);
@@ -163,6 +163,7 @@ public class SendTaskDAO {
 					stat.setObject(5, smctask.getState());
 					stat.setObject(6, 0);
 					stat.setObject(7, 0);
+					stat.setObject(8, smctask.getSubject());
 					stat.execute();
 					stat = conn.prepareStatement(sql2);
 					rs = stat.executeQuery();
@@ -202,6 +203,7 @@ public class SendTaskDAO {
 						smctask.setState(rs.getInt("state"));
 						smctask.setSuccessCount(rs.getInt("successCount"));
 						smctask.setFailCount(rs.getInt("failCount"));
+						smctask.setSubject(rs.getString("subject"));
 						if(rs.getDate("completeTime") == null){
 							smctask.setCompleteTime("未结束");
 							

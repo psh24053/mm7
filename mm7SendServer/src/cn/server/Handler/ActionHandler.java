@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import cn.common.DBNUMINFO;
 import cn.common.MyException;
 import cn.panshihao.mm7send.SendMM7;
+import cn.panshihao.mm7send.SendSMC;
 import cn.server.bean.Content;
 import cn.server.bean.Failnumber;
 import cn.server.bean.MyLimit;
@@ -534,15 +535,104 @@ public class ActionHandler {
 
 	public String newSmcTask(JSONObject requestJSON,
 			HttpServletRequest request, HttpServletResponse response)throws Exception{
+		
+		boolean bool = false;
 		int cod = 0;
+		int numberCount = 0;
+		int taskID = 0;
+		int successCount = 0;
+		int failCount = 0;
+		
+		List<String> customNumberList = new ArrayList<String>();
+		String customNumberstr = "";
+		
+		List<Content> contentList = new ArrayList<Content>();
 		JSONObject prm = new JSONObject();
-		SendTaskDAO sendTask = new SendTaskDAO();
-		PhoneNumDAO phoneNum = new PhoneNumDAO();
+		Smctask sendTask = new Smctask();
+		SendSMC sendSMC = null;
+		SendTaskDAO sendTaskDao = new SendTaskDAO();
+		DBNumber dbNumberDao = new DBNumber();
+		numberCount = dbNumberDao.getAllCount();
+		int allPageNum = 0;
 		
-		cod = requestJSON.getInt("cod");
-		prm = requestJSON.getJSONObject("prm");
+		if(numberCount/DBNUMINFO.MAX_SEND_SMC_NUM == 0 || numberCount == DBNUMINFO.MAX_SEND_SMC_NUM){
+			allPageNum = 1;
+		}
+		if(numberCount%DBNUMINFO.MAX_SEND_SMC_NUM == 0 && numberCount > DBNUMINFO.MAX_SEND_SMC_NUM){
+			allPageNum = numberCount/DBNUMINFO.MAX_SEND_SMC_NUM;
+		}
+		if(numberCount%DBNUMINFO.MAX_SEND_SMC_NUM != 0 && numberCount > DBNUMINFO.MAX_SEND_SMC_NUM){
+			allPageNum = numberCount/DBNUMINFO.MAX_SEND_SMC_NUM + 1;
+		}
 		
-		return null;
+		try {
+			cod = requestJSON.getInt("cod");
+			prm = requestJSON.getJSONObject("prm");
+			String name = prm.getString("name");
+			String subject = prm.getString("subject");
+			
+			JSONArray customnumber = prm.getJSONArray("CustomNumber");
+			String content = prm.getString("content");
+			
+			for (int i = 0; i < customnumber.length(); i++) {
+				customNumberList.add(customnumber.getString(i));
+			}
+			
+			
+			StringBuilder sb = new StringBuilder(); 
+			if(customNumberList != null  && customNumberList.size()>0){
+				for (int i = 0; i < customNumberList.size(); i++) {  
+			        if (i < customNumberList.size() - 1) {  
+			            sb.append(customNumberList.get(i) + ",");  
+			        } else {  
+			            sb.append(customNumberList.get(i));  
+			        }  
+			    }  
+			}
+			customNumberstr = sb.toString();
+			
+			sendTask.setName(name);
+			sendTask.setContent(content);
+			sendTask.setSubject(subject);
+			sendTask.setCustomTo(customNumberstr);
+			sendTask.setState(1);
+			sendTask.setToCount(numberCount+customNumberList.size());
+			
+			taskID = sendTaskDao.insertSmctask(sendTask);
+			
+			//分次发送
+			for (int i = 1; i <= allPageNum; i++) {
+				List<String> toNumbers = dbNumberDao.getToNumberList(new MyLimit(i, DBNUMINFO.MAX_SEND_MM7_NUM));
+				sendSMC = new SendSMC(toNumbers, subject, content);
+				if(sendSMC.Submit() == true){
+					bool = true;
+					successCount = successCount+toNumbers.size();
+				}else{
+					failCount = failCount+toNumbers.size();
+				}
+			}
+			//发送定制号码
+			sendSMC = new SendSMC(customNumberList, subject, content);
+			if(sendSMC.Submit() == true){
+				bool = true;
+				successCount = successCount+customNumberList.size();
+			}else{
+				failCount = failCount+customNumberList.size();
+			}
+			
+			
+			if(bool){
+				sendTaskDao.updateSmcTask(taskID, successCount, failCount, 2);
+			}else{
+				sendTaskDao.updateSmcTask(taskID, successCount, failCount, 3);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new MyException("发送短信任务异常", e);
+		}
+		
+		return getResponseJson(cod, bool, null).toString();
 	}
 	
 	public String getSmcTaskList(JSONObject requestJSON,
@@ -575,6 +665,7 @@ public class ActionHandler {
 				temp.put("failCount", smctask.getFailCount());
 				temp.put("completeTime", smctask.getCompleteTime());
 				temp.put("content", smctask.getContent());
+				temp.put("subject", smctask.getSubject());
 				String customNumber = smctask.getCustomTo();
 				String[] strArray = null;   
 			    strArray = customNumber.split(",");

@@ -3,6 +3,7 @@ package cn.server.bean;
 public class Smctask {
 	private int id;
 	private String name;
+	private String subject;
 	private String content;
 	private String createTime;
 	private int toCount;
@@ -11,6 +12,15 @@ public class Smctask {
 	private int successCount;
 	private int failCount;
 	private String completeTime;
+	
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
 	public int getId() {
 		return id;
 	}
