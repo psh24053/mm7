@@ -101,6 +101,7 @@ public class SendSMC {
 		bind.SetLoginType(1);
 
 		System.out.println("SGIP Send -> SGIP_BIND");
+		System.out.println("--------------------------------------------");
 		response = bind.write(out);
 		if (response != 0) {
 			System.out.println("write error");
@@ -132,7 +133,8 @@ public class SendSMC {
 			System.out.println("SGIP Send -> Receiver -> SEQNUMBER -> "
 					+ temp.getSeqno_1() + "," + temp.getSeqno_2() + ","
 					+ temp.getSeqno_3());
-
+			
+			System.out.println("--------------------------------------------");
 		}
 		byte[] byte_content = new byte[140];
 
@@ -141,6 +143,7 @@ public class SendSMC {
 			String toNumber = toList.get(i);
 
 			Submit submit = new Submit(SPINFO.SGIP_NODEID);// 节点号
+			
 			Date nowtime = new Date();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
 			String tmpTime = dateFormat.format(nowtime);
@@ -149,7 +152,7 @@ public class SendSMC {
 			submit.setSPNumber(SPINFO.SGIP_SPNUMBER);// 接入号
 			submit.setChargeNumber(SPINFO.SGIP_SPNUMBER);
 
-			submit.setServiceType(SPINFO.SGIP_NODEID + "");// 服务号
+			submit.setServiceType(SPINFO.SGIP_SPNUMBER);// 服务号
 			submit.setCorpId(SPINFO.SGIP_CORPID);// 企业号
 			submit.setFeeType(3);
 			submit.setFeeValue("0");
@@ -170,7 +173,6 @@ public class SendSMC {
 			} catch (SGIP_Exception e) {
 				e.printStackTrace();
 			}
-
 			response = submit.write(out);
 			if (response != 0) {
 				System.out.println("submit error");
@@ -195,6 +197,7 @@ public class SendSMC {
 					successList.add(toNumber);
 				} else {
 					System.out.println(toNumber+" -> fail");
+					System.out.println(toNumber + " "+submitResp.getResult());
 					failList.add(toNumber);
 				}
 
@@ -202,6 +205,7 @@ public class SendSMC {
 						+ temp.getSeqno_1() + "," + temp.getSeqno_2() + ","
 						+ temp.getSeqno_3());
 
+				System.out.println("--------------------------------------------");
 			}
 
 		}
@@ -283,8 +287,13 @@ public class SendSMC {
 	}
 
 	public static void main(String[] args) {
-		SendSMC send = new SendSMC(null, null, null);
-
+		
+		List<String> tolist = new ArrayList<String>();
+		tolist.add("18684012650");
+		
+		SendSMC send = new SendSMC(tolist, "content", "subject");
+		
+		send.Submit();
 	}
 
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.json.JSONObject;
@@ -62,7 +63,7 @@ public class FileUpload extends HttpServlet {
 
 		try {
 			// 可以上传多个文件
-			List<FileItem> list = (List<FileItem>) upload.parseRequest(request);
+			List<FileItem> list = (List<FileItem>) upload.parseRequest((RequestContext) request);
 
 			for (FileItem item : list) {
 				// 获取表单的属性名字
