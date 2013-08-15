@@ -148,28 +148,27 @@ public class SendSMC {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
 			String tmpTime = dateFormat.format(nowtime);
 
-			submit.setReportFlag(1);
 			submit.setSPNumber(SPINFO.SGIP_SPNUMBER);// 接入号
-			submit.setChargeNumber(SPINFO.SGIP_SPNUMBER);
+			submit.setChargeNumber("000000000000000000000");
 
-			submit.setServiceType(SPINFO.SGIP_SPNUMBER);// 服务号
+			submit.setServiceType("");// 服务类型
 			submit.setCorpId(SPINFO.SGIP_CORPID);// 企业号
-			submit.setFeeType(3);
+			submit.setFeeType(1);
 			submit.setFeeValue("0");
 			submit.setGivenValue("0");
 			submit.setAgentFlag(0);
 			submit.setMOrelatetoMTFlag(0);
 			submit.setExpireTime(tmpTime);
 			submit.setScheduleTime(tmpTime);// 不同的短信接口对时间的要求也不一样子。这里一定要
-			submit.setPriority(6);
+			submit.setPriority(0);
 			submit.setReportFlag(1);
 			submit.setTP_pid(0);
 			submit.setTP_udhi(0);
 			submit.setMessageType(0);
-			submit.setBinContent(10, byte_content);
+			submit.setBinContent(byte_content.length, byte_content);
 			try {
 				submit.setUserNumber("86" + toNumber);// 手机号不过一定要加86
-				submit.setContent(15, content);
+				submit.setContent(content.length(), content);
 			} catch (SGIP_Exception e) {
 				e.printStackTrace();
 			}
@@ -291,7 +290,7 @@ public class SendSMC {
 		List<String> tolist = new ArrayList<String>();
 		tolist.add("18684012650");
 		
-		SendSMC send = new SendSMC(tolist, "content", "subject");
+		SendSMC send = new SendSMC(tolist, "subject", "contentasdasd");
 		
 		send.Submit();
 	}

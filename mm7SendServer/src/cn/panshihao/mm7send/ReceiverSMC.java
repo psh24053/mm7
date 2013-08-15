@@ -51,7 +51,7 @@ public class ReceiverSMC {
 		while(!serverSocket.isClosed()){
 			
 			Socket socket = serverSocket.accept();
-			
+			System.out.println(socket);
 			// 启动处理线程
 			new receiverThread(socket, socket.getRemoteSocketAddress().toString()).start();
 			
@@ -256,6 +256,41 @@ public class ReceiverSMC {
 	
 		public static final int success = 1;
 		public static final int faillogin = 2;
+	}
+	public static void main(String[] args) {
+		ReceiverSMC smc = new ReceiverSMC(new receiverListener() {
+			
+			@Override
+			public void onUnBind(Unbind unbind) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public int onReport(Report report) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public int onDeliver(Deliver deliver) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public int onBind(Bind bind) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+		});
+		
+		try {
+			smc.startReceiver();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
